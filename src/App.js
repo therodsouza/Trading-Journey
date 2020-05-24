@@ -1,24 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Switch, Route } from 'react-router-dom';
+
+import Layout from './hoc/Layout/Layout';
+import Cockpit from './components/Cockpit/Cockpit';
+import Journal from './components/Journal/Journal';
+import Statistic from './components/Statistics/Statistics';
 
 function App() {
+
+  let routes = (
+    <Switch>
+      <Route path="/cockpit" component={Cockpit} />
+      <Route path="/journal" component={Journal} />
+      <Route path="/stats" component={Statistic} />
+    </Switch>
+  )
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Layout>
+        {routes}
+      </Layout>
     </div>
   );
 }

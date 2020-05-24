@@ -1,0 +1,48 @@
+<div>
+                <h3>Path</h3>
+                <h4>Start new day trading session?</h4>
+                <ul>
+                    <li>Start/end date and time</li>
+                    <li>Overall market condition (up trend, down trend, range, ATR)</li>
+                    <li>Mental health</li>
+                    <li>Physical health</li>
+                </ul>
+                <h4>Enter risk management parameters</h4>
+                <ul>
+                    <li>Profit target</li>
+                    <li>Max loss</li>
+                    <li>Consecutives stop losses</li>
+                    <li>Max drawdown</li>
+                </ul>
+                <h4>New Trade button - open wizard</h4>
+                <ul>
+                    <li>Market</li>
+                    <li>Side</li>
+                    <li>Timeframe</li>
+                    <li>Risk</li>
+                    <li>
+                        Pattern
+                <ul>
+                            <li>
+                                Break out
+                        <ul>
+                                    <li>Range</li>
+                                    <li>Barb wire</li>
+                                    <li>Prior quote</li>
+                                </ul>
+                            </li>
+                            <li>Reversal bar</li>
+                            <li>+/-B180</li>
+                            <li>Inside bar</li>
+                            <li>Fakey</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Location
+            </li>
+                    <li>Volume</li>
+                    <li>Stop loss</li>
+                    <li>Take profit</li>
+                </ul>
+                <h4>Trigger button</h4>
+            </div>
