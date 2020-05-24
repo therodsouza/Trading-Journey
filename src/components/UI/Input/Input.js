@@ -1,4 +1,5 @@
 import React from 'react';
+import CurrencyInput from 'react-currency-masked-input';
 
 import classes from './input.module.css';
 
@@ -32,6 +33,7 @@ const input = (props) => {
                 <select onChange={props.changed}
                     className={classes.InputElement}
                     value={props.value} >
+                    <option value='' disabled selected>{props.elementConfig.placeholder}</option>
                     {props.elementConfig.options.map(option => (
                         <option key={option.value} value={option.value}>
                             {option.displayValue}
@@ -39,6 +41,12 @@ const input = (props) => {
                     ))}
                 </select>
             );
+            break;
+        case ('currency'):
+            inputElement = <CurrencyInput
+                className={inputClasses.join(' ')}
+                placeholder={props.elementConfig.placeholder}
+                onChange={props.changed} />
             break;
         default:
             inputElement = <input onChange={props.changed}

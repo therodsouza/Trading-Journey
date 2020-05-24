@@ -11,59 +11,67 @@ const RiskParameters = props => {
 
     const [riskForm, setRiskForm] = useState({
         profitTarget: {
-            elementType: 'input',
+            elementType: 'currency',
             elementConfig: {
-                type: 'text',
-                placeholder: 'Profit target'
+                type: 'number',
+                placeholder: 'Enter a presumable profit target for this session'
             },
             value: '',
             validation: {
-                required: true
+                required: true,
+                minLength: 2,
             },
             valid: false,
-            touched: false
+            touched: false,
+            label: 'Profit target:'
         },
     
         maxLoss: {
-            elementType: 'input',
+            elementType: 'currency',
             elementConfig: {
-                type: 'text',
-                placeholder: 'Max loss'
+                type: 'number',
+                placeholder: 'Enter maximum loss allowed for this session'
             },
             value: '',
             validation: {
-                required: true
+                required: true,
+                minLength: 2,
             },
             valid: false,
-            touched: false
+            touched: false,
+            label: 'Max loss:'
         },
     
         stopLosses: {
             elementType: 'input',
             elementConfig: {
-                type: 'text',
-                placeholder: 'Consecutive stop losses'
+                type: 'number',
+                placeholder: 'Enter consecutive stop losses allowed for this session'
             },
             value: '',
             validation: {
-                required: true
+                required: true,
+                minLength: 1,
             },
             valid: false,
-            touched: false
+            touched: false,
+            label: 'Consecutive stop losses:'
         },
         
         maxDrawdown : {
-            elementType: 'input',
+            elementType: 'currency',
             elementConfig: {
-                type: 'text',
-                placeholder: 'Max drawdown'
+                type: 'number',
+                placeholder: 'Enter maximum drawdown'
             },
             value: '',
             validation: {
-                required: true
+                required: true,
+                minLength: 1,
             },
             valid: false,
-            touched: false
+            touched: false,
+            label: 'Max drawdown:'
         }
     });
 
@@ -115,6 +123,7 @@ const RiskParameters = props => {
                 formElementsArray.map(formElement => (
                     <Input
                         key={formElement.id}
+                        label={formElement.config.label}
                         elementType={formElement.config.elementType}
                         elementConfig={formElement.config.elementConfig}
                         value={formElement.config.value}

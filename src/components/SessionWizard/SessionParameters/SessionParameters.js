@@ -11,12 +11,15 @@ const SessionParameters = props => {
 
     const [sessionForm, setSessionForm] = useState({
         marketCondition: {
-            elementType: 'input',
+            elementType: 'select',
             elementConfig: {
-                type: 'text',
+                options: [
+                    { value: 'uptrend', displayValue: 'Up Trend' },
+                    { value: 'range', displayValue: 'Range' },
+                    { value: 'downtrend', displayValue: 'Down trend' }
+                ],
                 placeholder: 'Overall market condition'
             },
-            value: '',
             validation: {
                 required: true
             },
@@ -25,9 +28,15 @@ const SessionParameters = props => {
         },
 
         mentalStrength: {
-            elementType: 'input',
+            elementType: 'select',
             elementConfig: {
-                type: 'text',
+                options: [
+                    { value: '5', displayValue: 'Playing to win' },
+                    { value: '4', displayValue: 'Playing to compete' },
+                    { value: '3', displayValue: 'Playing to improve' },
+                    { value: '2', displayValue: 'Playing to cruise' },
+                    { value: '1', displayValue: 'Playing not to lose' },
+                ],
                 placeholder: 'Mental strength'
             },
             value: '',
@@ -39,9 +48,13 @@ const SessionParameters = props => {
         },
 
         physicalStrength: {
-            elementType: 'input',
+            elementType: 'select',
             elementConfig: {
-                type: 'text',
+                options: [
+                    { value: '5', displayValue: 'Strong' },
+                    { value: '3', displayValue: 'Neutral' },
+                    { value: '1', displayValue: 'Weak' },
+                ],
                 placeholder: 'Physical strength'
             },
             value: '',
