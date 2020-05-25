@@ -1,0 +1,3 @@
+export const CREATE_SESSION = 'CREATE_SESSION';
+export const CANCEL_SESSION = 'CANCEL_SESSION';
+export const END_SESSION = 'END_SESSION';

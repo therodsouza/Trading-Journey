@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Input from '../../UI/Input/Input';
 import Button from '../../UI/Button/Button';
 
-import { checkValidity } from '../../../util/validation';
+import { checkValidity } from '../../../util/utility';
 
 const RiskParameters = props => {
+
+    useEffect(() => {
+        console.log('RISK_PARAMETERS');
+        console.log(props);
+    }, []);
 
     const [formIsValid, setFormIsValid] = useState(false);
 
@@ -14,7 +19,7 @@ const RiskParameters = props => {
             elementType: 'currency',
             elementConfig: {
                 type: 'number',
-                placeholder: 'Enter a presumable profit target for this session'
+                placeholder: 'Enter presumable profit target for this session'
             },
             value: '',
             validation: {
@@ -25,7 +30,7 @@ const RiskParameters = props => {
             touched: false,
             label: 'Profit target:'
         },
-    
+
         maxLoss: {
             elementType: 'currency',
             elementConfig: {
@@ -41,7 +46,7 @@ const RiskParameters = props => {
             touched: false,
             label: 'Max loss:'
         },
-    
+
         stopLosses: {
             elementType: 'input',
             elementConfig: {
@@ -57,8 +62,8 @@ const RiskParameters = props => {
             touched: false,
             label: 'Consecutive stop losses:'
         },
-        
-        maxDrawdown : {
+
+        maxDrawdown: {
             elementType: 'currency',
             elementConfig: {
                 type: 'number',
@@ -109,7 +114,13 @@ const RiskParameters = props => {
 
     const startSessionHandler = (event) => {
         event.preventDefault();
-        alert('New trading session started. Good trade!')
+        props.onStart({
+            profitTarget: 1000,
+            maxLoss: 500,
+            stopLosses: 3,
+            maxDrawdown: 500
+
+        })
     }
 
     const previousPageHandler = (event) => {

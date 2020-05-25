@@ -16,3 +16,10 @@ export const checkValidity = (value, rules) => {
     return isValid;
 
 }
+
+export const updateObject = (oldObject, updatedProperties) => {
+    return {
+        ...oldObject,
+        ...updatedProperties
+    };
+};

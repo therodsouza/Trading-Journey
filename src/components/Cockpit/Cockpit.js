@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Route } from 'react-router-dom';
 
 import Button from '../UI/Button/Button';
 import Modal from '../UI/Modal/Modal';

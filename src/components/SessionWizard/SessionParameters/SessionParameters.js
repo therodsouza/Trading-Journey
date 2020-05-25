@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Input from '../../UI/Input/Input';
 import Button from '../../UI/Button/Button';
 
-import { checkValidity } from '../../../util/validation';
+import { checkValidity } from '../../../util/utility';
 
 const SessionParameters = props => {
+
+    useEffect(() => {
+        console.log('SESSION_PARAMETERS');
+    }, []);
 
     const [formIsValid, setFormIsValid] = useState(false);
 
@@ -20,6 +24,7 @@ const SessionParameters = props => {
                 ],
                 placeholder: 'Overall market condition'
             },
+            value: '',
             validation: {
                 required: true
             },
