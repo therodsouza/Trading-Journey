@@ -105,6 +105,13 @@ const SessionParameters = props => {
 
     const nextPageHandler = (event) => {
         event.preventDefault();
+
+        props.onComplete({
+            marketCondition: sessionForm.marketCondition.value,
+            mentalStrength: sessionForm.mentalStrength.value,
+            physicalStrength: sessionForm.physicalStrength.value
+        });
+
         props.nextStep();
     }
 

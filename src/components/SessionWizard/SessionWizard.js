@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import StepWizard from 'react-step-wizard';
 import * as actions from '../../store/actions/index';
@@ -9,22 +9,29 @@ import RiskParameters from '../SessionWizard/RiskParameters/RiskParameters';
 
 const SessionWizard = props => {
 
+    const [sessionParameters, setSessionParameters] = useState(null);
+
     useEffect(() => {
-        console.log('SESSION_WIZARD');
+        console.log('SESSION WIZARD');
     });
+
+    const sessionCreatedHandler = (riskParameters) => {
+        const session = {
+            ...sessionParameters, ...riskParameters
+        }
+        props.onSessionCreated(session);
+    }
 
     return (
         <div>
             <h3>New trading session wizard</h3>
             <StepWizard >
-                <SessionParameters />
-                <RiskParameters onStart={props.onSessionCreated}/>
-
+                <SessionParameters onComplete={setSessionParameters} />
+                <RiskParameters onComplete={sessionCreatedHandler} />
             </StepWizard>
         </div>
     );
 };
-
 
 const mapStateToProps = state => {
     return {

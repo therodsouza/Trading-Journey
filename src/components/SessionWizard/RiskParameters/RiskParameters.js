@@ -9,7 +9,6 @@ const RiskParameters = props => {
 
     useEffect(() => {
         console.log('RISK_PARAMETERS');
-        console.log(props);
     }, []);
 
     const [formIsValid, setFormIsValid] = useState(false);
@@ -114,13 +113,12 @@ const RiskParameters = props => {
 
     const startSessionHandler = (event) => {
         event.preventDefault();
-        props.onStart({
-            profitTarget: 1000,
-            maxLoss: 500,
-            stopLosses: 3,
-            maxDrawdown: 500
-
-        })
+        props.onComplete({
+            profitTarget: riskForm.profitTarget.value,
+            maxLoss: riskForm.profitTarget.value,
+            stopLosses: riskForm.profitTarget.value,
+            maxDrawdown: riskForm.maxDrawdown.value
+        });
     }
 
     const previousPageHandler = (event) => {

@@ -3,7 +3,10 @@ import React, { useState } from 'react';
 import Button from '../UI/Button/Button';
 import Modal from '../UI/Modal/Modal';
 import SessionWizard from '../SessionWizard/SessionWizard';
+import SessionInfo from '../SessionInfo/SessionInfo';
+
 import classes from './cockpit.module.css';
+import { connect } from 'react-redux';
 
 const Cockpit = props => {
 
@@ -19,12 +22,22 @@ const Cockpit = props => {
 
     return (
         <div className={classes.Cockpit}>
-            <Button btnType="Danger" onClick={newSessionHandler}>New Session</Button>
-            <Modal show={newSession} modalClosed={newSessionCancelHandler} >
+            <Button btnType="Success" onClick={newSessionHandler}
+                disabled={props.isSessionActive}>New Session</Button>
+            <Button btnType="Danger" onClick={newSessionHandler}
+                disabled={!props.isSessionActive}>End Session</Button>
+            <Modal show={newSession && !props.isSessionActive} modalClosed={newSessionCancelHandler} >
                 <SessionWizard />
             </Modal>
+            <SessionInfo />
         </div>
     );
 };
 
-export default Cockpit
+const mapStatetoProps = state => {
+    return {
+        isSessionActive: state.active
+    }
+}
+
+export default connect(mapStatetoProps)(Cockpit);

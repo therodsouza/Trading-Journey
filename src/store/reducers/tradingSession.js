@@ -4,13 +4,19 @@ import { updateObject } from '../../util/utility';
 
 const initialState = {
     id: null,
-    session: null,
+    session: {
+        profitTarget: 0,
+        maxLoss: 0,
+        stopLosses: 0,
+        maxDrawdown: 0
+    },
     startDateTime: null,
-    endDateTime: null
+    endDateTime: null,
+    active: false
 }
 
 const createSession = (state, action) => {
-    return updateObject(state, { session: action.session, startDateTime: Date.now() });
+    return updateObject(state, { session: action.session, startDateTime: Date.now(), active: true });
 }
 
 const endSession = (state, action) => {
