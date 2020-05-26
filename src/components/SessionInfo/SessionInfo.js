@@ -1,20 +1,43 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Wrapper from '../../hoc/WrapperAux/WrapperAux';
+
+import classes from './sessionInfo.module.css';
 
 const SessionInfo = props => {
 
     return (
-        <div>
-            <p>Session information</p>
-            <p>{props.sessionStartDateTime}</p>
-            <p>{props.profitTarget}</p>
-            <p>{props.maxLoss}</p>
-            <p>{props.stopLosses}</p>
-            <p>{props.maxDrawdown}</p>
-            <p>{props.marketCondition}</p>
-            <p>{props.mentalStrength}</p>
-            <p>{props.physicalStrength}</p>
-        </div>
+        <Wrapper>
+            <div className={classes.SessionInfo}>
+                <div className={classes.card}>
+                    <div className={classes.title}>
+                        <p>Session Information</p>
+                    </div>
+                    <p>Session duration: <span>{props.sessionStartDateTime}</span></p>
+                    <p>Market condition: <span>{props.marketCondition}</span></p>
+                    <p>Mental strength: <span>{props.mentalStrength}</span></p>
+                    <p>Physical strength: <span>{props.physicalStrength}</span></p>
+                </div>
+                <div className={classes.card}>
+                    <div className={classes.title}>
+                        <p>Risk Management</p>
+                    </div>
+                    <p>Profit target: <span>R${props.profitTarget.toFixed(2)}</span></p>
+                    <p>Max loss: <span>R${props.maxLoss.toFixed(2)}</span></p>
+                    <p>Consecutive stop losses: <span>{props.stopLosses}</span></p>
+                    <p>Max drawdown: <span>R${props.maxDrawdown.toFixed(2)}</span></p>
+                </div>
+                <div className={classes.card}>
+                    <div className={classes.title}>
+                        <p>Performance Report</p>
+                    </div>
+                    <p>Profit: <span>R$25.000,00</span></p>
+                    <p>Winners: <span>8</span></p>
+                    <p>Losers: <span>3</span></p>
+                    <p>Win rate: <span>68%</span></p>
+                </div>
+            </div>
+        </Wrapper>
     )
 };
 

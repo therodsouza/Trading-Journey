@@ -1,0 +1,30 @@
+.SessionInfo {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    background-color: rgb(247, 249, 252);
+    display: flex;
+}
+
+.SessionInfo span {
+    font-weight: normal;
+}
+
+.SessionInfo .card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 10px; 
+    background-color: white;
+    margin: 15px 5px;
+    padding: 15px;
+}
+
+.SessionInfo .container {
+    padding: 2px 8px;
+}
+
+.SessionInfo .title {
+    text-align: center;
+    font-weight: bold;
+}

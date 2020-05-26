@@ -1,3 +1,7 @@
 .Cockpit {
     margin: 10px;
 }
+
+.Cockpit p {
+    padding-left: 10px;
+}

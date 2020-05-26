@@ -15,8 +15,9 @@
 
 .Toolbar p {
     font-weight: bold;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: x-large;
     color: black;
+    margin-top: auto;
 }
 
 .Toolbar nav {

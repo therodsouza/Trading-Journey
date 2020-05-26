@@ -6,6 +6,8 @@ import Cockpit from './components/Cockpit/Cockpit';
 import Journal from './components/Journal/Journal';
 import Statistic from './components/Statistics/Statistics';
 
+import classes from './app.module.css';
+
 function App() {
 
   let routes = (
@@ -17,7 +19,7 @@ function App() {
   )
 
   return (
-    <div className="App">
+    <div className={classes.App}>
       <Layout>
         {routes}
       </Layout>

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 
-import Button from '../UI/Button/Button';
+import Button from 'react-bootstrap/Button';
 import Modal from '../UI/Modal/Modal';
 import SessionWizard from '../SessionWizard/SessionWizard';
 import SessionInfo from '../SessionInfo/SessionInfo';
+import Trades from '../Trades/Trades';
 
 import classes from './cockpit.module.css';
 import { connect } from 'react-redux';
@@ -20,16 +21,23 @@ const Cockpit = props => {
         setNewSession(false);
     }
 
+    const sessionInfo = props.isSessionActive ? <SessionInfo /> : null;
+
+    const trades = props.isSessionActive ? <Trades /> : null;
+
+
     return (
         <div className={classes.Cockpit}>
-            <Button btnType="Success" onClick={newSessionHandler}
-                disabled={props.isSessionActive}>New Session</Button>
-            <Button btnType="Danger" onClick={newSessionHandler}
+            <Button variant="dark" onClick={newSessionHandler}
+                disabled={props.isSessionActive}>New Session</Button>{' '}
+            <Button variant="dark" onClick={newSessionHandler}
                 disabled={!props.isSessionActive}>End Session</Button>
             <Modal show={newSession && !props.isSessionActive} modalClosed={newSessionCancelHandler} >
                 <SessionWizard />
             </Modal>
-            <SessionInfo />
+            { sessionInfo }
+            { trades }
+            
         </div>
     );
 };

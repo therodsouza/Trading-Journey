@@ -15,7 +15,7 @@ const RiskParameters = props => {
 
     const [riskForm, setRiskForm] = useState({
         profitTarget: {
-            elementType: 'currency',
+            elementType: 'input',
             elementConfig: {
                 type: 'number',
                 placeholder: 'Enter presumable profit target for this session'
@@ -31,7 +31,7 @@ const RiskParameters = props => {
         },
 
         maxLoss: {
-            elementType: 'currency',
+            elementType: 'input',
             elementConfig: {
                 type: 'number',
                 placeholder: 'Enter maximum loss allowed for this session'
@@ -63,7 +63,7 @@ const RiskParameters = props => {
         },
 
         maxDrawdown: {
-            elementType: 'currency',
+            elementType: 'input',
             elementConfig: {
                 type: 'number',
                 placeholder: 'Enter maximum drawdown'
@@ -114,10 +114,10 @@ const RiskParameters = props => {
     const startSessionHandler = (event) => {
         event.preventDefault();
         props.onComplete({
-            profitTarget: riskForm.profitTarget.value,
-            maxLoss: riskForm.profitTarget.value,
-            stopLosses: riskForm.profitTarget.value,
-            maxDrawdown: riskForm.maxDrawdown.value
+            profitTarget: parseFloat(riskForm.profitTarget.value),
+            maxLoss: parseFloat(riskForm.maxLoss.value),
+            stopLosses: parseFloat(riskForm.stopLosses.value),
+            maxDrawdown: parseFloat(riskForm.maxDrawdown.value)
         });
     }
 
