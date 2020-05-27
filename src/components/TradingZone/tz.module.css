@@ -12,6 +12,7 @@
     display: block;
     margin: auto;
     padding: 5px;
+    width: 50%;
 }
 
 .TZ .Toolbar {
@@ -19,5 +20,7 @@
     display: block;
     margin: auto;
     padding: 5px;
+    width: 50%;
+    text-align: center;
 
 }
