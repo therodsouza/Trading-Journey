@@ -23,7 +23,7 @@ const RiskParameters = props => {
             value: '',
             validation: {
                 required: true,
-                minLength: 2,
+                gte: 10,
             },
             valid: false,
             touched: false,
@@ -39,7 +39,7 @@ const RiskParameters = props => {
             value: '',
             validation: {
                 required: true,
-                minLength: 2,
+                gte: 10,
             },
             valid: false,
             touched: false,
@@ -55,7 +55,7 @@ const RiskParameters = props => {
             value: '',
             validation: {
                 required: true,
-                minLength: 1,
+                gte: 0,
             },
             valid: false,
             touched: false,
@@ -71,7 +71,7 @@ const RiskParameters = props => {
             value: '',
             validation: {
                 required: true,
-                minLength: 1,
+                gte: 10,
             },
             valid: false,
             touched: false,

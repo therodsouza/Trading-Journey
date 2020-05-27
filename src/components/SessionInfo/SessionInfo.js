@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Wrapper from '../../hoc/WrapperAux/WrapperAux';
 
 import classes from './sessionInfo.module.css';
+import { formatter } from '../../util/utility';
 
 const SessionInfo = props => {
 
@@ -22,10 +23,10 @@ const SessionInfo = props => {
                     <div className={classes.title}>
                         <p>Risk Management</p>
                     </div>
-                    <p>Profit target: <span>R${props.profitTarget.toFixed(2)}</span></p>
-                    <p>Max loss: <span>R${props.maxLoss.toFixed(2)}</span></p>
+                    <p>Profit target: <span>{formatter.format(props.profitTarget)}</span></p>
+                    <p>Max loss: <span>{formatter.format(props.maxLoss)}</span></p>
                     <p>Consecutive stop losses: <span>{props.stopLosses}</span></p>
-                    <p>Max drawdown: <span>R${props.maxDrawdown.toFixed(2)}</span></p>
+                    <p>Max drawdown: <span>{formatter.format(props.maxDrawdown)}</span></p>
                 </div>
                 <div className={classes.card}>
                     <div className={classes.title}>
