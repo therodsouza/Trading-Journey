@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from '../UI/Modal/Modal';
 import SessionWizard from '../SessionWizard/SessionWizard';
 import SessionInfo from '../SessionInfo/SessionInfo';
-import Trades from '../Trades/Trades';
+import TradingZone from '../TradingZone/TradingZone';
 
 import classes from './cockpit.module.css';
 import { connect } from 'react-redux';
@@ -23,7 +23,7 @@ const Cockpit = props => {
 
     const sessionInfo = props.isSessionActive ? <SessionInfo /> : null;
 
-    const trades = props.isSessionActive ? <Trades /> : null;
+    const tz = props.isSessionActive ? <TradingZone /> : null;
 
 
     return (
@@ -36,7 +36,7 @@ const Cockpit = props => {
                 <SessionWizard />
             </Modal>
             { sessionInfo }
-            { trades }
+            { tz }
             
         </div>
     );
