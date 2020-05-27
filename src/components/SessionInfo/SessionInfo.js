@@ -14,7 +14,7 @@ const SessionInfo = props => {
                     <div className={classes.title}>
                         <p>Session Information</p>
                     </div>
-                    <p>Session duration: <span>{props.sessionStartDateTime}</span></p>
+                    <p>Session started: <span>{new Date(props.sessionStartDateTime).toLocaleString()}</span></p>
                     <p>Market condition: <span>{props.marketCondition}</span></p>
                     <p>Mental strength: <span>{props.mentalStrength}</span></p>
                     <p>Physical strength: <span>{props.physicalStrength}</span></p>
