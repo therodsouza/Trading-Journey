@@ -41,7 +41,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSessionCreated: (session) => dispatch(actions.createSession(session))
+        onSessionCreated: (session) => dispatch(actions.createSession(session, 'XXX'))
     }
 };
 
