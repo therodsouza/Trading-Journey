@@ -12,7 +12,7 @@ const SessionInfo = props => {
             <div className={classes.SessionInfo}>
                 <div className={classes.card}>
                     <div className={classes.title}>
-                        <p>Session {props.sessionId.toString()}</p>
+                        <p>Session {props.sessionId}</p>
                     </div>
                     <p>Session started: <span>{new Date(props.sessionStartDateTime).toLocaleString()}</span></p>
                     <p>Market context: <span>{props.marketCondition}</span></p>
@@ -44,15 +44,15 @@ const SessionInfo = props => {
 
 const mapStateToProps = state => {
     return {
-        sessionId: state.id,
-        sessionStartDateTime: state.startDateTime,
-        marketCondition: state.marketCondition,
-        mentalStrength: state.mentalStrength,
-        physicalStrength: state.physicalStrength,
-        profitTarget: state.profitTarget,
-        maxLoss: state.maxLoss,
-        stopLosses: state.stopLosses,
-        maxDrawdown: state.maxDrawdown
+        sessionId: state.session.sessionId,
+        sessionStartDateTime: state.session.startDateTime,
+        marketCondition: state.session.marketCondition,
+        mentalStrength: state.session.mentalStrength,
+        physicalStrength: state.session.physicalStrength,
+        profitTarget: state.session.profitTarget,
+        maxLoss: state.session.maxLoss,
+        stopLosses: state.session.stopLosses,
+        maxDrawdown: state.session.maxDrawdown
     }
 }
 

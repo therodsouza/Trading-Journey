@@ -27,12 +27,12 @@ export const createSession = (session, token) => {
 
     return dispatch => {
         axios.post('/sessions.json', sessionData)
-        .then( response => {
-            dispatch(createSessionSuccess(response.data, sessionData))
-        })
-        .catch( error => {
-            dispatch(createSessionFailed(error));
-        })
+            .then(response => {
+                dispatch(createSessionSuccess(response.data.name, sessionData))
+            })
+            .catch(error => {
+                dispatch(createSessionFailed(error));
+            })
     }
 }
 
@@ -43,9 +43,35 @@ export const cancelSession = (session) => {
     }
 }
 
-export const endSession = (session) => {
+export const endSessionSuccess = (session) => {
     return {
-        type: actionTypes.END_SESSION,
+        type: actionTypes.END_SESSION_SUCCESS,
         session: session
+    }
+}
+
+export const endSessionFailed = (session, error) => {
+    return {
+        type: actionTypes.END_SESSION_FAILED,
+        session: session,
+        error: error
+    }
+}
+
+export const endSession = (session, token) => {
+
+    return dispatch => {
+        const { sessionId } = session;
+        const patch = {
+            active: false
+        }
+
+        axios.patch('/sessions/' + sessionId + '.json', patch)
+            .then(response => {
+                dispatch(endSessionSuccess(session));
+            })
+            .catch(error => {
+                dispatch(endSessionFailed(session, error.message));
+            });
     }
 }
