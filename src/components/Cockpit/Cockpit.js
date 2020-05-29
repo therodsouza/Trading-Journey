@@ -19,13 +19,17 @@ const Cockpit = props => {
         setNewSession(true);
     }
 
-    const sessionCancelHandler = () => {
+    const cancelSessionHandler = () => {
         setNewSession(false);
     }
 
     const endSessionHandler = () => {
         props.onSessionEnded(props.session);
-        setNewSession(false);
+    }
+
+    const onSessionCreatedHandler = (session) => {
+        props.onSessionCreated(session);
+        setNewSession(false)
     }
 
     const sessionInfo = props.isSessionActive ? <SessionInfo /> : null;
@@ -37,8 +41,8 @@ const Cockpit = props => {
                 disabled={props.isSessionActive}>New Session</Button>{' '}
             <Button variant="dark" onClick={endSessionHandler}
                 disabled={!props.isSessionActive}>End Session</Button>
-            <Modal show={newSession && !props.isSessionActive} modalClosed={sessionCancelHandler} >
-                <SessionWizard onSessionCreated={props.onSessionCreated}/>
+            <Modal show={newSession && !props.isSessionActive} modalClosed={cancelSessionHandler} >
+                <SessionWizard onSessionCreated={onSessionCreatedHandler}/>
             </Modal>
             { sessionInfo }
             { tz }
