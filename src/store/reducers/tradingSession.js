@@ -35,9 +35,10 @@ const endSessionSuccess = (state, action) => {
     return updateObject(state,
         {
             session: {
-                endDateTime: Date.now(),
-                ...action.session,
-                active: false,
+                ...state.session,
+                active: action.session.active,
+                endDateTime: action.session.endDateTime
+                
             }
         });
 }

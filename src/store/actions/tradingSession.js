@@ -43,10 +43,10 @@ export const cancelSession = (session) => {
     }
 }
 
-export const endSessionSuccess = (session) => {
+export const endSessionSuccess = (data) => {
     return {
         type: actionTypes.END_SESSION_SUCCESS,
-        session: session
+        session: data
     }
 }
 
@@ -63,12 +63,13 @@ export const endSession = (session, token) => {
     return dispatch => {
         const { sessionId } = session;
         const patch = {
-            active: false
+            active: false,
+            endDateTime: Date.now(),
         }
 
         axios.patch('/sessions/' + sessionId + '.json', patch)
             .then(response => {
-                dispatch(endSessionSuccess(session));
+                dispatch(endSessionSuccess(response.data));
             })
             .catch(error => {
                 dispatch(endSessionFailed(session, error.message));
