@@ -50,10 +50,9 @@ export const endSessionSuccess = (data) => {
     }
 }
 
-export const endSessionFailed = (session, error) => {
+export const endSessionFailed = (error) => {
     return {
         type: actionTypes.END_SESSION_FAILED,
-        session: session,
         error: error
     }
 }
@@ -72,7 +71,7 @@ export const endSession = (session, token) => {
                 dispatch(endSessionSuccess(response.data));
             })
             .catch(error => {
-                dispatch(endSessionFailed(session, error.message));
+                dispatch(endSessionFailed(error.message));
             });
     }
 }

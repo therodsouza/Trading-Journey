@@ -9,7 +9,9 @@ const RiskParameters = props => {
 
     useEffect(() => {
         console.log('RISK_PARAMETERS');
-    }, []);
+
+        return () => console.log('RISK_PARAMETERS UNMOUNT', props)
+    });
 
     const [formIsValid, setFormIsValid] = useState(false);
 

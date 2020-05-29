@@ -47,8 +47,8 @@ const endSessionFailed = (state, action) => {
     return updateObject(state,
         {
             session: {
+                ...state.session,
                 endDateTime: Date.now(),
-                ...action.session,
                 error: action.error
             }
         });
