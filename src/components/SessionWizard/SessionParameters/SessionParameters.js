@@ -10,7 +10,7 @@ const SessionParameters = props => {
     const [formIsValid, setFormIsValid] = useState(false);
 
     const [sessionForm, setSessionForm] = useState({
-        marketCondition: {
+        marketContext: {
             elementType: 'select',
             elementConfig: {
                 options: [
@@ -18,7 +18,7 @@ const SessionParameters = props => {
                     { value: 'range', displayValue: 'Range' },
                     { value: 'downtrend', displayValue: 'Down trend' }
                 ],
-                placeholder: 'Overall market condition'
+                placeholder: 'Overall market context'
             },
             value: '',
             validation: {
@@ -109,7 +109,7 @@ const SessionParameters = props => {
         event.preventDefault();
 
         props.onComplete({
-            marketCondition: sessionForm.marketCondition.value,
+            marketContext: sessionForm.marketContext.value,
             mentalStrength: sessionForm.mentalStrength.value,
             physicalStrength: sessionForm.physicalStrength.value
         });

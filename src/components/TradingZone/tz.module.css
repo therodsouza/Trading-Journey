@@ -9,7 +9,6 @@
 
 .TZ .Title {
     box-sizing: border-box;
-    display: block;
     margin: auto;
     padding: 5px;
     width: 50%;
@@ -17,7 +16,6 @@
 
 .TZ .Toolbar {
     box-sizing: border-box;
-    display: block;
     margin: auto;
     padding: 5px;
     width: 50%;
