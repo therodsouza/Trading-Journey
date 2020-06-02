@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import Input from '../../UI/Input/Input';
 import Button from '../../UI/Button/Button';
@@ -6,10 +6,6 @@ import Button from '../../UI/Button/Button';
 import { checkValidity } from '../../../util/utility';
 
 const SessionParameters = props => {
-
-    useEffect(() => {
-        console.log('SESSION_PARAMETERS');
-    }, []);
 
     const [formIsValid, setFormIsValid] = useState(false);
 
@@ -70,6 +66,12 @@ const SessionParameters = props => {
             touched: false
         }
     });
+
+    if (props.reset) {
+        for (let key in sessionForm) {
+            sessionForm[key].value = null;
+        }
+    }
 
     const formElementsArray = [];
     for (let key in sessionForm) {

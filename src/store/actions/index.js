@@ -1,5 +1,6 @@
 export {
     createSession,
     cancelSession,
-    endSession
+    endSession,
+    restoreSession
 } from './tradingSession';

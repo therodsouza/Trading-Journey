@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Button from 'react-bootstrap/Button';
 import Modal from '../UI/Modal/Modal';
@@ -13,6 +13,12 @@ import * as actions from '../../store/actions/index';
 
 const Cockpit = props => {
 
+    const onSessionRestore = props.onSessionRestore;
+
+    useEffect(() => {
+        onSessionRestore();
+    }, [onSessionRestore]);
+
     const [newSession, setNewSession] = useState(false);
 
     const newSessionHandler = () => {
@@ -25,6 +31,7 @@ const Cockpit = props => {
 
     const endSessionHandler = () => {
         props.onSessionEnded(props.session);
+        props.history.push('/stats');
     }
 
     const onSessionCreatedHandler = (session) => {
@@ -60,7 +67,8 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onSessionCreated: (session) => dispatch(actions.createSession(session, 'XXX')),
-        onSessionEnded: (session) => dispatch(actions.endSession(session, 'XXX'))
+        onSessionEnded: (session) => dispatch(actions.endSession(session, 'XXX')),
+        onSessionRestore: () => dispatch(actions.restoreSession())
     }
 }
 

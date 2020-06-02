@@ -38,7 +38,7 @@ const endSessionSuccess = (state, action) => {
                 ...state.session,
                 active: action.session.active,
                 endDateTime: action.session.endDateTime
-                
+
             }
         });
 }
@@ -58,6 +58,16 @@ const cancelSession = (state, action) => {
     return updateObject(state, initialState);
 }
 
+const restoreSessionSuccess = (state, action) => {
+    return updateObject(state,
+        {
+            session: {
+                sessionId: action.sessionId,
+                ...action.session
+            }
+        })
+}
+
 const reducer = (state = initialState, action) => {
 
     switch (action.type) {
@@ -66,6 +76,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.END_SESSION_SUCCESS: return endSessionSuccess(state, action);
         case actionTypes.END_SESSION_FAILED: return endSessionFailed(state, action);
         case actionTypes.CANCEL_SESSION: return cancelSession(state, action);
+        case actionTypes.RESTORE_SESSION_SUCCESS: return restoreSessionSuccess(state, action);
         default: return state;
     }
 

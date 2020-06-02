@@ -75,3 +75,32 @@ export const endSession = (session, token) => {
             });
     }
 }
+
+export const restoreSessionSuccess = (data) => {
+
+    const sessionId = Object.keys(data)[0];
+    const session = data[sessionId];
+
+    return {
+        type: actionTypes.RESTORE_SESSION_SUCCESS,
+        sessionId: sessionId,
+        session: session
+    }
+}
+
+export const restoreSessionFailed = (error) => {
+    console.log(error);
+}
+
+export const restoreSession = () => {
+
+    return dispatch => {
+        axios.get('/sessions.json?orderBy="active"&equalTo=true')
+            .then(response => {
+                dispatch(restoreSessionSuccess(response.data));
+            })
+            .catch(error => {
+                dispatch(restoreSessionFailed(error));
+            });
+    }
+}
