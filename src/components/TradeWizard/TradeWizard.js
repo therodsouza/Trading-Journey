@@ -8,10 +8,14 @@ const TradeWizard = props => {
 
     const [contextParameters, setContextParameters] = useState(null);
 
+    const side = props.type === 'Buy' ? 'Long' : 'Short';
+
     const tradeActivatedHandler = (strategyParameters) => {
         const trade = {
-            ...contextParameters, ...strategyParameters
+            ...contextParameters, ...strategyParameters, side: side
         }
+
+        props.onTradeActivated(trade);
     }
 
     return (

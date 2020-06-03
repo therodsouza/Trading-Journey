@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { createStore, compose, applyMiddleware } from 'redux';
+import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 
 import './index.css';
@@ -12,10 +12,16 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import tradingSessionReducer from './store/reducers/tradingSession';
+import tradeReducer from './store/reducers/trade';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(tradingSessionReducer, composeEnhancers(
+const rootReducer = combineReducers({
+  tradingSession: tradingSessionReducer,
+  trade: tradeReducer
+});
+
+const store = createStore(rootReducer, composeEnhancers(
   applyMiddleware(thunk)
 ));
 

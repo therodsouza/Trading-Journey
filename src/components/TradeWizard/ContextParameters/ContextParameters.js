@@ -42,7 +42,7 @@ const ContextParameter = props => {
             valid: false,
             touched: false
         },
-        risk: {
+        riskReward: {
             elementType: 'select',
             elementConfig: {
                 options: [
@@ -135,7 +135,11 @@ const ContextParameter = props => {
         event.preventDefault();
 
         props.onComplete({
-
+            ticker: contextParametersForm.ticker.value,
+            timeframe: contextParametersForm.timeframe.value,
+            riskReward: contextParametersForm.riskReward.value,
+            pattern: contextParametersForm.pattern.value,
+            location: contextParametersForm.location.value
         });
 
         props.nextStep();

@@ -59,8 +59,8 @@ const Cockpit = props => {
 
 const mapStatetoProps = state => {
     return {
-        isSessionActive: state.session.active,
-        session: state.session
+        isSessionActive: state.tradingSession.session.active,
+        session: state.tradingSession.session
     }
 }
 

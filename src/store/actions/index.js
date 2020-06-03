@@ -4,3 +4,7 @@ export {
     endSession,
     restoreSession
 } from './tradingSession';
+
+export {
+    activateTrade
+} from './trade';

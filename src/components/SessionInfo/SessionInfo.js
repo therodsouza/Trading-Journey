@@ -44,15 +44,15 @@ const SessionInfo = props => {
 
 const mapStateToProps = state => {
     return {
-        sessionId: state.session.sessionId,
-        sessionStartDateTime: state.session.startDateTime,
-        marketContext: state.session.marketContext,
-        mentalStrength: state.session.mentalStrength,
-        physicalStrength: state.session.physicalStrength,
-        profitTarget: state.session.profitTarget,
-        maxLoss: state.session.maxLoss,
-        stopLosses: state.session.stopLosses,
-        maxDrawdown: state.session.maxDrawdown
+        sessionId: state.tradingSession.session.sessionId,
+        sessionStartDateTime: state.tradingSession.session.startDateTime,
+        marketContext: state.tradingSession.session.marketContext,
+        mentalStrength: state.tradingSession.session.mentalStrength,
+        physicalStrength: state.tradingSession.session.physicalStrength,
+        profitTarget: state.tradingSession.session.profitTarget,
+        maxLoss: state.tradingSession.session.maxLoss,
+        stopLosses: state.tradingSession.session.stopLosses,
+        maxDrawdown: state.tradingSession.session.maxDrawdown
     }
 }
 

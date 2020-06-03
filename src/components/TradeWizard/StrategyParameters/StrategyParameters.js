@@ -107,7 +107,10 @@ const StrategyParameters = props => {
     const activateTradeHandler = (event) => {
         event.preventDefault();
         props.onComplete({
-           
+           volume: strategyParametersForm.volume.value,
+           priceIn: strategyParametersForm.priceIn.value,
+           stopLoss: strategyParametersForm.stopLoss.value,
+           target: strategyParametersForm.target.value
         });
     }
 
