@@ -7,7 +7,8 @@ export const activateTrade = (trade) => {
     return dispatch => {
         axios.post('/trades.json', trade)
             .then(response => {
-                dispatch(activateTradeSuccess(response.data, trade))
+                dispatch(activateTradeSuccess(response.data, trade));
+                dispatch(fetchTrades(trade.session));
             })
             .catch(error => {
                 dispatch(activateTradeFailed(error));
