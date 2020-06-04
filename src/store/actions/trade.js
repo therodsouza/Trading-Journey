@@ -32,3 +32,39 @@ export const activateTradeFailed = (error) => {
         error: error
     }
 }
+
+export const fetchTrades = (sessionId) => {
+    return dispatch => {
+        axios.get('/trades.json?orderBy="session"&equalTo="' + sessionId + '"')
+            .then(response => {
+                const fetchedTrades = [];
+                for (let key in response.data) {
+                    fetchedTrades.push(
+                        {
+                            ...response.data[key],
+                            id: key
+                        }
+                    )
+                }
+                dispatch(fetchTradesSuccess(fetchedTrades));
+            })
+            .catch(error => {
+                dispatch(fetchTradesFailed(error));
+            });
+    }
+}
+
+export const fetchTradesSuccess = (trades) => {
+    return {
+        type: actionTypes.FETCH_TRADES_SUCCESS,
+        trades: trades
+    }
+}
+
+export const fetchTradesFailed = (error) => {
+    console.log(error);
+    return {
+        type: actionTypes.FETCH_TRADES_FAILED,
+        error: error
+    }
+}

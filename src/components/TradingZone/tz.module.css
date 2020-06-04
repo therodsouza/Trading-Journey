@@ -4,9 +4,13 @@
     margin: 1%;
     padding: 10px;
     background-color: rgb(247, 249, 252);
-    display: flex;
+    display: block;
 }
 
+.TZ .Top {
+    display: flex;
+    
+}
 .TZ .Title {
     box-sizing: border-box;
     margin: auto;
@@ -21,4 +25,9 @@
     width: 50%;
     text-align: center;
 
+}
+
+.TZ .Table {
+    box-sizing: border-box;
+    margin: 1%;
 }

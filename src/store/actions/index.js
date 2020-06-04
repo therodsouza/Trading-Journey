@@ -6,5 +6,6 @@ export {
 } from './tradingSession';
 
 export {
-    activateTrade
+    activateTrade,
+    fetchTrades
 } from './trade';

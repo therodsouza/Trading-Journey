@@ -65,7 +65,7 @@ const restoreSessionSuccess = (state, action) => {
                 sessionId: action.sessionId,
                 ...action.session
             }
-        })
+        });
 }
 
 const reducer = (state = initialState, action) => {
@@ -79,7 +79,6 @@ const reducer = (state = initialState, action) => {
         case actionTypes.RESTORE_SESSION_SUCCESS: return restoreSessionSuccess(state, action);
         default: return state;
     }
-
 };
 
 export default reducer;
