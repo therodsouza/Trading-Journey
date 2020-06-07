@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Table from 'react-bootstrap/Table';
+import * as Icon from 'react-bootstrap-icons';
 
 const TradeTable = props => {
 
@@ -8,7 +9,7 @@ const TradeTable = props => {
 
     if (props.trades) {
         content = props.trades.map(trade => (
-            <tr>
+            <tr key={trade.id}>
                 <td>{trade.ticker}</td>
                 <td>{trade.pattern}</td>
                 <td>{trade.timeframe}</td>
@@ -18,6 +19,7 @@ const TradeTable = props => {
                 <td>{trade.stopLoss}</td>
                 <td>{trade.target}</td>
                 <td>{trade.status}</td>
+                <td style={{ textAlign: 'center' }}><Icon.XOctagonFill style = {{cursor: 'pointer'}} color="red" onClick={() => props.onClosePosition(trade.id)} /></td>
             </tr>
         ));
     }
@@ -35,6 +37,7 @@ const TradeTable = props => {
                     <th>Stop Loss</th>
                     <th>Target</th>
                     <th>Status</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>

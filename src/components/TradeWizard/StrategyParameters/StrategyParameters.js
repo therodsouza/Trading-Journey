@@ -8,21 +8,7 @@ import { checkValidity } from '../../../util/utility';
 const StrategyParameters = props => {
     const [formIsValid, setFormIsValid] = useState(false);
 
-    const [strategyParametersForm, setStrategyParametersForm] = useState({
-        volume: {
-            elementType: 'input',
-            elementConfig: {
-                type: 'number',
-                placeholder: 'Enter volume'
-            },
-            value: '',
-            validation: {
-                required: true
-            },
-            valid: false,
-            touched: false,
-            label: 'Volume:'
-        },
+    const baseState = {
         priceIn: {
             elementType: 'input',
             elementConfig: {
@@ -64,8 +50,24 @@ const StrategyParameters = props => {
             valid: false,
             touched: false,
             label: 'Target:'
-        }
-    })
+        },
+        volume: {
+            elementType: 'input',
+            elementConfig: {
+                type: 'number',
+                placeholder: 'Enter volume'
+            },
+            value: '',
+            validation: {
+                required: true
+            },
+            valid: false,
+            touched: false,
+            label: 'Volume:'
+        },
+    };
+
+    const [strategyParametersForm, setStrategyParametersForm] = useState(baseState);
 
     const formElementsArray = [];
     for (let key in strategyParametersForm) {
@@ -112,6 +114,8 @@ const StrategyParameters = props => {
            stopLoss: strategyParametersForm.stopLoss.value,
            target: strategyParametersForm.target.value
         });
+        setStrategyParametersForm(baseState);
+        props.goToStep(1);
     }
 
     let form = (
@@ -138,7 +142,7 @@ const StrategyParameters = props => {
 
     return (
         <div>
-            <h3>{props.type}</h3>
+            <h4>{props.type}</h4>
             {form}
         </div>
     );

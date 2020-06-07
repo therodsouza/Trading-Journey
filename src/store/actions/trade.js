@@ -69,3 +69,41 @@ export const fetchTradesFailed = (error) => {
         error: error
     }
 }
+
+export const closePosition = (trade) => {
+    return dispatch => {
+
+        const { id } = trade;
+        const patch = {
+            priceOut: trade.priceOut,
+            reason: trade.reason,
+            tags: trade.tags,
+            closeDateTime: Date.now(),
+            status: 'Closed'
+        }
+
+        axios.patch('/trades/' + id + '.json', patch)
+            .then(response => {
+                dispatch(closePositionSuccess(id, response.data));
+            })
+            .catch(error => {
+                dispatch(closePositionFailed(id, error));
+            });
+    }
+}
+
+export const closePositionSuccess = (id, trade) => {
+    return {
+        type: actionTypes.CLOSE_POSITION_SUCCESS,
+        closedtrade: trade,
+        id: id
+    }
+}
+
+export const closePositionFailed = (id, error) => {
+    return {
+        type: actionTypes.CLOSE_POSITION_FAILED,
+        error: error,
+        id: id
+    }
+}

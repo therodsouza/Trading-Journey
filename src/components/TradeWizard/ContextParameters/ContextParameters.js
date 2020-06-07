@@ -6,9 +6,10 @@ import Input from '../../UI/Input/Input';
 import { checkValidity } from '../../../util/utility';
 
 const ContextParameter = props => {
+
     const [formIsValid, setFormIsValid] = useState(false);
 
-    const [contextParametersForm, setContextParametersForm] = useState({
+    const formBaseState = {
         ticker: {
             elementType: 'select',
             elementConfig: {
@@ -97,7 +98,9 @@ const ContextParameter = props => {
             valid: false,
             touched: false
         }
-    });
+    };
+
+    const [contextParametersForm, setContextParametersForm] = useState(formBaseState);
 
     const formElementsArray = [];
     for (let key in contextParametersForm) {
@@ -169,7 +172,7 @@ const ContextParameter = props => {
 
     return (
         <div>
-            <h3>{props.type}</h3>
+            <h4>{props.type}</h4>
             {form}
         </div>
     );

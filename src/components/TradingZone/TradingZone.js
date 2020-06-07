@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from '../UI/Modal/Modal';
 import TradeWizard from '../TradeWizard/TradeWizard';
 import TradeTable from '../TradeTable/TradeTable';
+import ClosePosition from '../ClosePosition/ClosePosition';
 
 import * as actions from '../../store/actions/index';
 import classes from './tz.module.css';
@@ -19,6 +20,8 @@ const TradingZone = props => {
     }, [session, onFetchTrades])
 
     const [type, setType] = useState(null)
+
+    const [closePosition, setClosePosition] = useState(null);
 
     const buyHandler = () => {
         setType('Buy');
@@ -43,6 +46,15 @@ const TradingZone = props => {
         setType(null);
     }
 
+    const closePositionHandler = closeParameters => {
+        setClosePosition(null);
+        props.onClosePosition(closeParameters);
+    }
+
+    const cancelClosePositionHandler = () => {
+        setClosePosition(null);
+    }
+
     return (
         <div className={classes.TZ}>
             <div className={classes.Top}>
@@ -59,7 +71,10 @@ const TradingZone = props => {
                 </Modal>
             </div>
             <div className={classes.Table}>
-                <TradeTable trades={props.trades} />
+                <TradeTable trades={props.trades} onClosePosition={setClosePosition}/>
+                <Modal show={closePosition} modalClosed={cancelClosePositionHandler} >
+                    <ClosePosition id={closePosition} onComplete={closePositionHandler}/>
+                </Modal>
             </div>
         </div>
     );
@@ -75,7 +90,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onTradeActivated: (trade) => dispatch(actions.activateTrade(trade)),
-        onFetchTrades: (session) => dispatch(actions.fetchTrades(session))
+        onFetchTrades: (session) => dispatch(actions.fetchTrades(session)),
+        onClosePosition: (closeParameters) => dispatch(actions.closePosition(closeParameters))
     }
 }
 

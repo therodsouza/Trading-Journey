@@ -15,12 +15,13 @@ const TradeWizard = props => {
             ...contextParameters, ...strategyParameters, side: side
         }
 
+        setContextParameters(null);
         props.onTradeActivated(trade);
     }
 
     return (
         <div>
-            <h3>{props.type}</h3>
+            <h4>{props.type}</h4>
             <StepWizard>
                 <ContextParameters onComplete={setContextParameters} />
                 <StrategyParameters onComplete={tradeActivatedHandler} />

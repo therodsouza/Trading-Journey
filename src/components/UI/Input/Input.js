@@ -1,5 +1,7 @@
 import React from 'react';
 import CurrencyInput from 'react-currency-masked-input';
+import TagsInput from 'react-tagsinput';
+import './react-tagsinput.css';
 
 import classes from './input.module.css';
 
@@ -7,7 +9,6 @@ const input = (props) => {
 
     let inputElement = null;
     const inputClasses = [classes.InputElement];
-
 
     let validationErr = null;
     if (props.invalid && props.shouldValidate && props.touched) {
@@ -48,12 +49,16 @@ const input = (props) => {
                 placeholder={props.elementConfig.placeholder}
                 onChange={props.changed} />
             break;
+        case ('tagsinput'):
+            inputElement = <TagsInput
+                value={props.value}
+                onChange={props.changed} />
+            break;
         default:
             inputElement = <input onChange={props.changed}
                 className={classes.InputElement}
                 {...props.elementConfig}
                 value={props.value} />;
-
     }
 
     return (

@@ -7,5 +7,6 @@ export {
 
 export {
     activateTrade,
-    fetchTrades
+    fetchTrades,
+    closePosition
 } from './trade';
