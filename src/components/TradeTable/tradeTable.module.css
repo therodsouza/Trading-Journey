@@ -1,0 +1,7 @@
+.TradeTable .winner {
+    color: #28a745;
+}
+
+.TradeTable .loser {
+    color: #dc3545;
+}
