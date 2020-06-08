@@ -15,11 +15,20 @@ const TradeTable = props => {
                 <td>{trade.timeframe}</td>
                 <td>{trade.side}</td>
                 <td>{trade.riskReward}</td>
+                <td>{trade.volume}</td>
                 <td>{trade.priceIn}</td>
                 <td>{trade.stopLoss}</td>
                 <td>{trade.target}</td>
                 <td>{trade.status}</td>
-                <td style={{ textAlign: 'center' }}><Icon.XOctagonFill style = {{cursor: 'pointer'}} color="red" onClick={() => props.onClosePosition(trade.id)} /></td>
+                <td>{trade.priceOut}</td>
+                <td style={{ textAlign: 'center' }}>
+                    {
+                        trade.status === 'Open' ? <Icon.XOctagonFill
+                            style={{ cursor: 'pointer' }}
+                            color="red"
+                            onClick={() => props.onClosePosition(trade.id)} /> : null
+                    }
+                </td>
             </tr>
         ));
     }
@@ -33,10 +42,12 @@ const TradeTable = props => {
                     <th>Timeframe</th>
                     <th>Side</th>
                     <th>Ratio</th>
+                    <th>Volume</th>
                     <th>Price In</th>
                     <th>Stop Loss</th>
                     <th>Target</th>
                     <th>Status</th>
+                    <th>Price Out</th>
                     <th></th>
                 </tr>
             </thead>

@@ -5,6 +5,8 @@ import Wrapper from '../../hoc/WrapperAux/WrapperAux';
 import classes from './sessionInfo.module.css';
 import { formatter } from '../../util/utility';
 
+import PerformanceReport from '../PerformanceReport/PerformanceReport';
+
 const SessionInfo = props => {
 
     return (
@@ -29,13 +31,7 @@ const SessionInfo = props => {
                     <p>Max drawdown: <span>{formatter.format(props.maxDrawdown)}</span></p>
                 </div>
                 <div className={classes.card}>
-                    <div className={classes.title}>
-                        <p>Performance Report</p>
-                    </div>
-                    <p>Profit: <span>R$25.000,00</span></p>
-                    <p>Winners: <span>8</span></p>
-                    <p>Losers: <span>3</span></p>
-                    <p>Win rate: <span>68%</span></p>
+                    <PerformanceReport />
                 </div>
             </div>
         </Wrapper>

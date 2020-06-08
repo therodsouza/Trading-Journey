@@ -4,7 +4,7 @@ import { updateObject } from '../../util/utility';
 
 const initialState = {
     trade: null,
-    trades: null
+    trades: []
 }
 
 const activateTradeSuccess = (state, action) => {
