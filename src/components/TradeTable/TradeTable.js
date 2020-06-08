@@ -1,8 +1,10 @@
 import React from 'react';
-
 import Table from 'react-bootstrap/Table';
+
+import { formatter } from '../../util/utility';
 import * as Icon from 'react-bootstrap-icons';
 import classes from './tradeTable.module.css';
+
 
 const TradeTable = props => {
 
@@ -28,11 +30,11 @@ const TradeTable = props => {
                 <td>{trade.side}</td>
                 <td>{trade.riskReward}</td>
                 <td>{trade.volume}</td>
-                <td>{trade.priceIn}</td>
-                <td>{trade.stopLoss}</td>
-                <td>{trade.target}</td>
+                <td>{formatter.format(trade.priceIn)}</td>
+                <td>{formatter.format(trade.stopLoss)}</td>
+                <td>{formatter.format(trade.target)}</td>
                 <td>{trade.status}</td>
-                <td>{trade.priceOut}</td>
+                <td>{trade.priceOut ? formatter.format(trade.priceOut) : '-'}</td>
                 <td style={{ textAlign: 'center' }}>
                     {
                         trade.status === 'Open' ? <Icon.XOctagonFill
