@@ -24,6 +24,7 @@ const TradeTable = props => {
             }
 
             return <tr key={trade.id} className={trClass}>
+                <td>{new Date(trade.startDateTime).toLocaleTimeString()}</td>
                 <td>{trade.ticker}</td>
                 <td>{trade.pattern}</td>
                 <td>{trade.timeframe}</td>
@@ -51,6 +52,7 @@ const TradeTable = props => {
         <Table striped bordered hover size="sm" className={classes.TradeTable}>
             <thead>
                 <tr>
+                    <th>Time</th>
                     <th>Ticker</th>
                     <th>Patern</th>
                     <th>Timeframe</th>

@@ -1,0 +1,20 @@
+.PerformanceReport {
+    box-sizing: border-box;
+}
+
+.PerformanceReport .leftPanel {
+    float: left;
+    width: 50%;
+    margin-right: 1px;
+    border-right: 1px solid black;
+}
+
+.PerformanceReport .rightPanel {
+    margin-left: 1%;
+    float: left;
+}
+
+.PerformanceReport .title {
+    text-align: center;
+    font-weight: bold;
+}
