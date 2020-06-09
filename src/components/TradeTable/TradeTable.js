@@ -8,10 +8,20 @@ import classes from './tradeTable.module.css';
 
 const TradeTable = props => {
 
+    const compare = (trade, other) => {
+        if (trade.startDateTime < other.startDateTime)
+            return -1;
+        
+        if (trade.startDateTime > other.startDateTime)
+            return 1;
+        
+        return 0;
+    }
+
     let content = null;
 
     if (props.trades) {
-        content = props.trades.map(trade => {
+        content = props.trades.sort(compare).map(trade => {
 
             let trClass = null;
             if (trade.status === 'Closed') {
