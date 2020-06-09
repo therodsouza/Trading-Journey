@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes';
 
 import axios from '../../axios';
+import { tradeComparator } from '../../util/utility';
 
 export const activateTrade = (trade) => {
 
@@ -47,7 +48,8 @@ export const fetchTrades = (sessionId) => {
                         }
                     )
                 }
-                dispatch(fetchTradesSuccess(fetchedTrades));
+                
+                dispatch(fetchTradesSuccess(fetchedTrades.sort(tradeComparator)));
             })
             .catch(error => {
                 dispatch(fetchTradesFailed(error));

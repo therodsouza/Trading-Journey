@@ -32,3 +32,13 @@ export const formatter = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
 });
+
+export const tradeComparator = (trade, other) => {
+    if (trade.startDateTime < other.startDateTime)
+        return -1;
+    
+    if (trade.startDateTime > other.startDateTime)
+        return 1;
+    
+    return 0;
+}
