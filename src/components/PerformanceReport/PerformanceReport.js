@@ -7,7 +7,7 @@ import classes from './performanceReport.module.css';
 const PerformanceReport = props => {
 
     let maxScore = 0;
-    let minScore = Number.MAX_SAFE_INTEGER;
+    let minScore = null;
     let overallScore = 0;
     let overallCosts = 0;
     let winners = 0;
@@ -29,7 +29,7 @@ const PerformanceReport = props => {
             score = - (trade.priceOut - trade.priceIn) * trade.volume;
         }
 
-        if (score >= 0) {
+        if (score > 0) {
             winners++;
             rowWinners++
             rowLosers = 0;

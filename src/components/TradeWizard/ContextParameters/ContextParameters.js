@@ -30,7 +30,7 @@ const ContextParameter = props => {
             elementType: 'select',
             elementConfig: {
                 options: [
-                    { value: 'M1', displayValue: 'M1' },
+                    { value: 'M2', displayValue: 'M2' },
                     { value: 'M10', displayValue: 'M10' },
                     { value: 'M60', displayValue: 'M60' }
                 ],
@@ -71,6 +71,9 @@ const ContextParameter = props => {
                     { value: 'Pullback Breakout', displayValue: 'Pullback Breakout' },
                     { value: 'Range Breakout', displayValue: 'Range Breakout' },
                     { value: 'Reversal Bar', displayValue: 'Reversal Bar' },
+                    { value: 'E Bar', displayValue: 'E Bar' },
+                    { value: 'I Bar', displayValue: 'I Bar' },
+                    { value: 'A La Loca', displayValue: 'A La Loca' }
                 ],
                 placeholder: 'Pattern'
             },
