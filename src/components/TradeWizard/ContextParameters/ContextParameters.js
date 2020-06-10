@@ -64,13 +64,13 @@ const ContextParameter = props => {
             elementType: 'select',
             elementConfig: {
                 options: [
-                    { value: 'Breakout', displayValue: 'Breakout' },
-                    { value: 'Reversal Bar', displayValue: 'Reversal Bar' },
                     { value: 'B180', displayValue: 'B180' },
                     { value: 'Inside Bar', displayValue: 'Inside Bar' },
                     { value: 'Inside Bar Coil', displayValue: 'Inside Bar Coil' },
                     { value: 'Fakey', displayValue: 'Fakey' },
-                    { value: 'Pullback', displayValue: 'Pullback' }
+                    { value: 'Pullback Breakout', displayValue: 'Pullback Breakout' },
+                    { value: 'Range Breakout', displayValue: 'Range Breakout' },
+                    { value: 'Reversal Bar', displayValue: 'Reversal Bar' },
                 ],
                 placeholder: 'Pattern'
             },
@@ -85,9 +85,12 @@ const ContextParameter = props => {
             elementType: 'select',
             elementConfig: {
                 options: [
-                    { value: 'Lower Band', displayValue: 'Lower Band' },
+                   
+                    { value: 'Upper Free Bar', displayValue: 'Upper Free Bar' },
                     { value: 'Upper Band', displayValue: 'Upper Band' },
-                    { value: 'Free Bar', displayValue: 'Free Bar' }
+                    { value: 'Middle', displayValue: 'Middle' },
+                    { value: 'Lower Band', displayValue: 'Lower Band' },
+                    { value: 'Lower Free Bar', displayValue: 'Lower Free Bar' }
                 ],
                 placeholder: 'Location'
             },
