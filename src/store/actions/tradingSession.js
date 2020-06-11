@@ -60,10 +60,11 @@ export const endSessionFailed = (error) => {
 export const endSession = (session, token) => {
 
     return dispatch => {
-        const { sessionId } = session;
+        const { sessionId, comments } = session;
         const patch = {
             active: false,
             endDateTime: Date.now(),
+            comments: comments
         }
 
         axios.patch('/sessions/' + sessionId + '.json', patch)

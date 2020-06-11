@@ -5,6 +5,7 @@ import Modal from '../UI/Modal/Modal';
 import SessionWizard from '../SessionWizard/SessionWizard';
 import SessionInfo from '../SessionInfo/SessionInfo';
 import TradingZone from '../TradingZone/TradingZone';
+import CloseSession from '../CloseSession/CloseSession';
 
 import classes from './cockpit.module.css';
 import { connect } from 'react-redux';
@@ -20,18 +21,13 @@ const Cockpit = props => {
     }, [onSessionRestore]);
 
     const [newSession, setNewSession] = useState(false);
+    const [endingSession, setEndingSession] = useState(false);
 
-    const newSessionHandler = () => {
-        setNewSession(true);
-    }
+    const onSessionEndedHandler = (comments) => {
+        const { sessionId } = props.session;
 
-    const cancelSessionHandler = () => {
-        setNewSession(false);
-    }
-
-    const endSessionHandler = () => {
-        props.onSessionEnded(props.session);
-        props.history.push('/stats');
+        props.onSessionEnded({ sessionId: sessionId, comments: comments });
+        props.history.push('/journal');
     }
 
     const onSessionCreatedHandler = (session) => {
@@ -44,15 +40,18 @@ const Cockpit = props => {
 
     return (
         <div className={classes.Cockpit}>
-            <Button variant="dark" onClick={newSessionHandler}
+            <Button variant="dark" onClick={() => setNewSession(true)}
                 disabled={props.isSessionActive}>New Session</Button>{' '}
-            <Button variant="dark" onClick={endSessionHandler}
+            <Button variant="dark" onClick={() => setEndingSession(true)}
                 disabled={!props.isSessionActive}>End Session</Button>
-            <Modal show={newSession && !props.isSessionActive} modalClosed={cancelSessionHandler} >
-                <SessionWizard onSessionCreated={onSessionCreatedHandler}/>
+            <Modal show={newSession && !props.isSessionActive} modalClosed={() => setNewSession(false)} >
+                <SessionWizard onSessionCreated={onSessionCreatedHandler} />
             </Modal>
-            { sessionInfo }
-            { tz }
+            <Modal show={endingSession} modalClosed={() => setEndingSession(false)} >
+                <CloseSession onSessionClosed={onSessionEndedHandler} />
+            </Modal>
+            {sessionInfo}
+            {tz}
         </div>
     );
 };
