@@ -17,16 +17,17 @@ export const createSessionFailed = (error) => {
     };
 };
 
-export const createSession = (session, token) => {
+export const createSession = (session, token, userId) => {
 
     const sessionData = {
         ...session,
         startDateTime: Date.now(),
-        active: true
+        active: true,
+        userId: userId
     }
 
     return dispatch => {
-        axios.post('/sessions.json', sessionData)
+        axios.post('/sessions.json?auth=' + token, sessionData)
             .then(response => {
                 dispatch(createSessionSuccess(response.data.name, sessionData))
             })
@@ -67,7 +68,7 @@ export const endSession = (session, token) => {
             comments: comments
         }
 
-        axios.patch('/sessions/' + sessionId + '.json', patch)
+        axios.patch('/sessions/' + sessionId + '.json?auth=' + token, patch)
             .then(response => {
                 dispatch(endSessionSuccess(response.data));
             })
@@ -93,14 +94,13 @@ export const restoreSessionFailed = (error) => {
     return {
         type: actionTypes.RESTORE_SESSION_FAILED,
         error: error
-    }
-    
+    } 
 }
 
-export const restoreSession = () => {
+export const restoreSession = (token) => {
 
     return dispatch => {
-        axios.get('/sessions.json?orderBy="active"&equalTo=true')
+        axios.get('/sessions.json?auth=' + token + '&orderBy="active"&equalTo=true')
             .then(response => {
                 dispatch(restoreSessionSuccess(response.data));
             })

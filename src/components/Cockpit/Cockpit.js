@@ -16,11 +16,13 @@ import axios from '../../axios';
 
 const Cockpit = props => {
 
+    const token = props.token;
+    const userId = props.userId;
     const onSessionRestore = props.onSessionRestore;
 
     useEffect(() => {
-        onSessionRestore();
-    }, [onSessionRestore]);
+        onSessionRestore(token);
+    }, [token, onSessionRestore]);
 
     const [newSession, setNewSession] = useState(false);
     const [endingSession, setEndingSession] = useState(false);
@@ -28,12 +30,12 @@ const Cockpit = props => {
     const onSessionEndedHandler = (comments) => {
         const { sessionId } = props.session;
 
-        props.onSessionEnded({ sessionId: sessionId, comments: comments });
+        props.onSessionEnded({ sessionId: sessionId, comments: comments }, token);
         props.history.push('/journal');
     }
 
     const onSessionCreatedHandler = (session) => {
-        props.onSessionCreated(session);
+        props.onSessionCreated(session, token, userId);
         setNewSession(false)
     }
 
@@ -61,15 +63,17 @@ const Cockpit = props => {
 const mapStatetoProps = state => {
     return {
         isSessionActive: state.tradingSession.session.active,
-        session: state.tradingSession.session
+        session: state.tradingSession.session,
+        token: state.auth.token,
+        userId: state.auth.userId
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSessionCreated: (session) => dispatch(actions.createSession(session, 'XXX')),
-        onSessionEnded: (session) => dispatch(actions.endSession(session, 'XXX')),
-        onSessionRestore: () => dispatch(actions.restoreSession())
+        onSessionCreated: (session, token, userId) => dispatch(actions.createSession(session, token, userId)),
+        onSessionEnded: (session, token) => dispatch(actions.endSession(session, token)),
+        onSessionRestore: (token) => dispatch(actions.restoreSession(token))
     }
 }
 
