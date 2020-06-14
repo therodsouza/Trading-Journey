@@ -90,7 +90,11 @@ export const restoreSessionSuccess = (data) => {
 }
 
 export const restoreSessionFailed = (error) => {
-    console.log(error);
+    return {
+        type: actionTypes.RESTORE_SESSION_FAILED,
+        error: error
+    }
+    
 }
 
 export const restoreSession = () => {
@@ -101,7 +105,7 @@ export const restoreSession = () => {
                 dispatch(restoreSessionSuccess(response.data));
             })
             .catch(error => {
-                dispatch(restoreSessionFailed(error));
+                dispatch(restoreSessionFailed(error.message));
             });
     }
 }

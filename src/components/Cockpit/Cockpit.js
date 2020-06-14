@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
+
+import * as actions from '../../store/actions/index';
 
 import Button from 'react-bootstrap/Button';
 import Modal from '../UI/Modal/Modal';
@@ -8,9 +12,7 @@ import TradingZone from '../TradingZone/TradingZone';
 import CloseSession from '../CloseSession/CloseSession';
 
 import classes from './cockpit.module.css';
-import { connect } from 'react-redux';
-
-import * as actions from '../../store/actions/index';
+import axios from '../../axios';
 
 const Cockpit = props => {
 
@@ -71,4 +73,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStatetoProps, mapDispatchToProps)(Cockpit);
+export default connect(mapStatetoProps, mapDispatchToProps)(withErrorHandler(Cockpit, axios));

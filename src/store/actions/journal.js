@@ -4,7 +4,7 @@ import { sessionComparator } from '../../util/utility';
 
 export const fetchSessions = () => {
     return dispatch => {
-        axios.get('/sessions.jsons')
+        axios.get('/sessions.json')
             .then(response => {
                 const fetchedSessions = [];
                 for (let key in response.data) {
