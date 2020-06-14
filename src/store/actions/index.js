@@ -10,3 +10,7 @@ export {
     fetchTrades,
     closePosition
 } from './trade';
+
+export {
+    fetchSessions
+} from './journal';

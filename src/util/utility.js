@@ -42,3 +42,13 @@ export const tradeComparator = (trade, other) => {
     
     return 0;
 }
+
+export const sessionComparator = (session, other) => {
+    if (session.startDateTime < other.startDateTime)
+        return -1;
+    
+    if (session.startDateTime > other.startDateTime)
+        return 1;
+    
+    return 0;
+}

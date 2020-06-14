@@ -37,7 +37,7 @@ export const activateTradeFailed = (error) => {
 
 export const fetchTrades = (sessionId) => {
     return dispatch => {
-        axios.get('/trades.json?orderBy="session"&equalTo="' + sessionId + '"&orderBy="startDateTime"')
+        axios.get('/trades.json?orderBy="session"&equalTo="' + sessionId + '"')
             .then(response => {
                 const fetchedTrades = [];
                 for (let key in response.data) {
