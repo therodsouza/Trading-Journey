@@ -14,3 +14,10 @@ export {
 export {
     fetchSessions
 } from './journal';
+
+export {
+    auth,
+    setAuthRedirectPath,
+    authCheckState,
+    logout
+} from './auth';

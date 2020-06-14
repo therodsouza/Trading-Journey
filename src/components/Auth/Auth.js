@@ -1,7 +1,14 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom';
+
 import Spinner from '../UI/Spinner/Spinner';
+import Input from '../UI/Input/Input';
+import Button from '../UI/Button/Button';
+
+import * as actions from '../../store/actions/index';
 import { checkValidity } from '../../util/utility';
+import classes from './auth.module.css';
 
 const Auth = props => {
 

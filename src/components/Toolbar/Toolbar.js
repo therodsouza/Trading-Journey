@@ -8,7 +8,7 @@ const toolbar = props => {
         <header className={classes.Toolbar}>
             <p>Trading Journey</p>
             <nav>
-                <NavigationItems />
+                <NavigationItems isAuthenticated={props.isAuth} />
             </nav>
 
         </header>

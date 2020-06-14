@@ -14,13 +14,15 @@ import * as serviceWorker from './serviceWorker';
 import tradingSessionReducer from './store/reducers/tradingSession';
 import tradeReducer from './store/reducers/trade';
 import journalReducer from './store/reducers/journal';
+import authReducer from './store/reducers/auth';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
   tradingSession: tradingSessionReducer,
   trade: tradeReducer,
-  journal: journalReducer
+  journal: journalReducer,
+  auth: authReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(
