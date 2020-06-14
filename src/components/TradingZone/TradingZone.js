@@ -12,12 +12,13 @@ import classes from './tz.module.css';
 
 const TradingZone = props => {
 
-    const onFetchTrades = props.onFetchTrades;
     const session = props.session;
+    const token = props.token;
+    const onFetchTrades = props.onFetchTrades;
 
     useEffect(() => {
-        onFetchTrades(session);
-    }, [session, onFetchTrades])
+        onFetchTrades(session, token);
+    }, [session, token, onFetchTrades])
 
     const [type, setType] = useState(null)
 
@@ -83,14 +84,15 @@ const TradingZone = props => {
 const mapStateToProps = state => {
     return {
         session: state.tradingSession.session.sessionId,
-        trades: state.trade.trades
+        trades: state.trade.trades,
+        token: state.auth.token
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         onTradeActivated: (trade) => dispatch(actions.activateTrade(trade)),
-        onFetchTrades: (session) => dispatch(actions.fetchTrades(session)),
+        onFetchTrades: (session, token) => dispatch(actions.fetchTrades(session, token)),
         onClosePosition: (closeParameters) => dispatch(actions.closePosition(closeParameters))
     }
 }

@@ -7,12 +7,13 @@ import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
 const Journal = props => {
 
-    const onFetchSessions = props.onFetchSessions;
     const sessions = props.sessions;
+    const token = props.token;
+    const onFetchSessions = props.onFetchSessions;
 
     useEffect(() => {
-        onFetchSessions();
-    }, [onFetchSessions]);
+        onFetchSessions(token);
+    }, [token, onFetchSessions]);
 
     return (<div>
         <p>Journal</p>
@@ -24,13 +25,14 @@ const Journal = props => {
 
 const mapStateToProps = state => {
     return {
-        sessions: state.journal.sessions
+        sessions: state.journal.sessions,
+        token: state.auth.token
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchSessions: () => dispatch(actions.fetchSessions())
+        onFetchSessions: (token) => dispatch(actions.fetchSessions(token))
     }
 }
 

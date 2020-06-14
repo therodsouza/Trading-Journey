@@ -35,9 +35,9 @@ export const activateTradeFailed = (error) => {
     }
 }
 
-export const fetchTrades = (sessionId) => {
+export const fetchTrades = (sessionId, token) => {
     return dispatch => {
-        axios.get('/trades.json?orderBy="session"&equalTo="' + sessionId + '"')
+        axios.get('/trades.json?auth=' + token + '&orderBy="session"&equalTo="' + sessionId + '"')
             .then(response => {
                 const fetchedTrades = [];
                 for (let key in response.data) {
