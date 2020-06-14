@@ -24,6 +24,7 @@ function App(props) {
   let routes = (
     <Switch>
       <Route path="/auth" render={(props) => <Auth {...props} />} />
+      <Redirect to="/auth" />
     </Switch>
   )
 
