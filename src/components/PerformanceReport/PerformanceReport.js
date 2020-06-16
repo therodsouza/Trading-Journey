@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { formatter } from '../../util/utility';
 import classes from './performanceReport.module.css';
+import { calculatePerformance } from '../../store/actions/index';
 
 const PerformanceReport = props => {
+
+    const { trades, onPerformanceReport } = props;
+
+    useEffect(() => {
+        onPerformanceReport(trades)
+    }, [trades, onPerformanceReport])
+
     return (
         <div className={classes.PerformanceReport}>
             <div className={classes.title}>
@@ -29,6 +37,7 @@ const PerformanceReport = props => {
 
 const mapStateToProps = state => {
     return {
+        trades: state.trade.trades,
         profit: state.tradingSession.session.profit,
         winners: state.tradingSession.session.winners,
         losers: state.tradingSession.session.losers,
@@ -40,4 +49,10 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps)(PerformanceReport);
+const mapDispatchToProps = dispatch => {
+    return {
+        onPerformanceReport: trades => dispatch(calculatePerformance(trades))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PerformanceReport);

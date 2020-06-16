@@ -1,6 +1,4 @@
 import * as actionTypes from './actionTypes';
-import { calculatePerformance } from './index';
-
 import axios from '../../axios';
 import { tradeComparator } from '../../util/utility';
 
@@ -52,8 +50,7 @@ export const fetchTrades = (sessionId, token) => {
                 
                 const orderedTrades = fetchedTrades.sort(tradeComparator);
 
-                dispatch(fetchTradesSuccess(orderedTrades));
-                dispatch(calculatePerformance(orderedTrades));                
+                dispatch(fetchTradesSuccess(orderedTrades));              
             })
             .catch(error => {
                 dispatch(fetchTradesFailed(error));
