@@ -43,13 +43,13 @@ const TradingZone = props => {
                 session: props.session,
                 startDateTime: Date.now(),
                 status: 'Open'
-            });
+            }, token);
         setType(null);
     }
 
     const closePositionHandler = closeParameters => {
         setClosePosition(null);
-        props.onClosePosition(closeParameters);
+        props.onClosePosition(closeParameters, token);
     }
 
     const cancelClosePositionHandler = () => {
@@ -91,9 +91,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onTradeActivated: (trade) => dispatch(actions.activateTrade(trade)),
+        onTradeActivated: (trade, token) => dispatch(actions.activateTrade(trade, token)),
         onFetchTrades: (session, token) => dispatch(actions.fetchTrades(session, token)),
-        onClosePosition: (closeParameters) => dispatch(actions.closePosition(closeParameters))
+        onClosePosition: (closeParameters, token) => dispatch(actions.closePosition(closeParameters, token))
     }
 }
 

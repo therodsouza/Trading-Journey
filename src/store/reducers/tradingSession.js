@@ -68,6 +68,15 @@ const restoreSessionSuccess = (state, action) => {
         });
 }
 
+const calculatePerformance = (state, action) => {
+    return {
+        session: {
+            ...state.session,
+            ...action.performance
+        }
+    };
+}
+
 const reducer = (state = initialState, action) => {
 
     switch (action.type) {
@@ -77,6 +86,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.END_SESSION_FAILED: return endSessionFailed(state, action);
         case actionTypes.CANCEL_SESSION: return cancelSession(state, action);
         case actionTypes.RESTORE_SESSION_SUCCESS: return restoreSessionSuccess(state, action);
+        case actionTypes.CALCULATE_PERFORMANCE: return calculatePerformance(state, action);
         default: return state;
     }
 };

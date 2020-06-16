@@ -1,15 +1,16 @@
 import * as actionTypes from './actionTypes';
+import { calculatePerformance } from './index';
 
 import axios from '../../axios';
 import { tradeComparator } from '../../util/utility';
 
-export const activateTrade = (trade) => {
+export const activateTrade = (trade, token) => {
 
     return dispatch => {
-        axios.post('/trades.json', trade)
+        axios.post('/trades.json?auth=' + token, trade)
             .then(response => {
                 dispatch(activateTradeSuccess(response.data, trade));
-                dispatch(fetchTrades(trade.session));
+                dispatch(fetchTrades(trade.session, token));
             })
             .catch(error => {
                 dispatch(activateTradeFailed(error));
@@ -49,7 +50,10 @@ export const fetchTrades = (sessionId, token) => {
                     )
                 }
                 
-                dispatch(fetchTradesSuccess(fetchedTrades.sort(tradeComparator)));
+                const orderedTrades = fetchedTrades.sort(tradeComparator);
+
+                dispatch(fetchTradesSuccess(orderedTrades));
+                dispatch(calculatePerformance(orderedTrades));                
             })
             .catch(error => {
                 dispatch(fetchTradesFailed(error));
@@ -72,7 +76,7 @@ export const fetchTradesFailed = (error) => {
     }
 }
 
-export const closePosition = (trade) => {
+export const closePosition = (trade, token) => {
     return dispatch => {
 
         const { id } = trade;
@@ -84,7 +88,7 @@ export const closePosition = (trade) => {
             status: 'Closed'
         }
 
-        axios.patch('/trades/' + id + '.json', patch)
+        axios.patch('/trades/' + id + '.json?auth=' + token, patch)
             .then(response => {
                 dispatch(closePositionSuccess(id, response.data));
             })

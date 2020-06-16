@@ -94,7 +94,7 @@ export const restoreSessionFailed = (error) => {
     return {
         type: actionTypes.RESTORE_SESSION_FAILED,
         error: error
-    } 
+    }
 }
 
 export const restoreSession = (token) => {
@@ -107,5 +107,70 @@ export const restoreSession = (token) => {
             .catch(error => {
                 dispatch(restoreSessionFailed(error.message));
             });
+    }
+}
+
+export const calculatePerformance = (trades) => {
+
+    let maxScore = 0;
+    let minScore = null;
+    let overallScore = 0;
+    let overallCosts = 0;
+    let winners = 0;
+    let losers = 0;
+    let rowLosers = 0;
+    let maxSequenceLosers = 0;
+    let rowWinners = 0;
+    let maxSequenceWinners = 0;
+
+    trades.filter(trade => {
+        return trade.status === 'Closed'
+    }).map(trade => {
+
+        let score = 0;
+
+        if (trade.side === 'Long') {
+            score = + (trade.priceOut - trade.priceIn) * trade.volume;
+        } else {
+            score = - (trade.priceOut - trade.priceIn) * trade.volume;
+        }
+
+        if (score > 0) {
+            winners++;
+            rowWinners++
+            rowLosers = 0;
+        } else {
+            losers++;
+            rowLosers++;
+            rowWinners = 0;
+        }
+
+        maxSequenceWinners = maxSequenceWinners < rowWinners ? rowWinners : maxSequenceWinners;
+        maxSequenceLosers = maxSequenceLosers < rowLosers ? rowLosers : maxSequenceLosers;
+
+        overallScore += score;
+        overallCosts += trade.volume * 0.5 // FIXME based on asset class
+
+        maxScore = maxScore < overallScore ? overallScore : maxScore;
+        minScore = minScore > overallScore ? overallScore : minScore;
+        return trade;
+    });
+
+    const profit = (overallScore * .2) - overallCosts; // FIXME based on asset class
+    const winrate = (winners / (losers + winners)) * 100;
+    const drawdown = (minScore - maxScore) * .2;
+
+    return {
+        type: actionTypes.CALCULATE_PERFORMANCE,
+        performance: {
+            profit: profit,
+            winners: winners,
+            losers: losers,
+            winrate: winrate,
+            overallCosts: overallCosts,
+            maxSequenceWinners: maxSequenceWinners,
+            maxSequenceLosers: maxSequenceLosers,
+            drawdown: drawdown
+        }
     }
 }

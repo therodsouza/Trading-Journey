@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+
+import Calendar from './Calendar/Calendar';
 import * as actions from '../../store/actions/index';
+import classes from './journal.module.css';
 
 import axios from '../../axios';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
@@ -15,12 +18,14 @@ const Journal = props => {
         onFetchSessions(token);
     }, [token, onFetchSessions]);
 
-    return (<div>
-        <p>Journal</p>
-        {sessions.map(session => {
-            return <p>{session.id}</p>
-        })}
-    </div>)
+    return (
+        <div className={classes.Journal}>
+            <h4>Journal</h4>
+            <Calendar />
+            {sessions.map(session => {
+                return <p>{session.id}</p>
+            })}
+        </div>)
 }
 
 const mapStateToProps = state => {

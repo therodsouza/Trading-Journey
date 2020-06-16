@@ -2,7 +2,8 @@ export {
     createSession,
     cancelSession,
     endSession,
-    restoreSession
+    restoreSession,
+    calculatePerformance
 } from './tradingSession';
 
 export {
