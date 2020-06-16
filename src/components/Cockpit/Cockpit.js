@@ -28,9 +28,7 @@ const Cockpit = props => {
     const [endingSession, setEndingSession] = useState(false);
 
     const onSessionEndedHandler = (comments) => {
-        const { sessionId } = props.session;
-
-        props.onSessionEnded({ sessionId: sessionId, comments: comments }, token);
+        props.onSessionEnded({ ...props.session, comments: comments }, token);
         props.history.push('/journal');
     }
 

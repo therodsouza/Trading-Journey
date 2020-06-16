@@ -61,10 +61,20 @@ export const endSessionFailed = (error) => {
 export const endSession = (session, token) => {
 
     return dispatch => {
-        const { sessionId, comments } = session;
+        const { sessionId, profit, winners, losers, winrate,
+            overallCosts, maxSequenceWinners,
+            maxSequenceLosers, drawdown, comments } = session;
         const patch = {
             active: false,
             endDateTime: Date.now(),
+            profit: profit,
+            winners: winners,
+            losers: losers,
+            winrate: winrate,
+            overallCosts: overallCosts,
+            maxSequenceWinners: maxSequenceWinners,
+            maxSequenceLosers: maxSequenceLosers,
+            drawdown: drawdown,
             comments: comments
         }
 
