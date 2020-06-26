@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import Calendar from './Calendar/Calendar';
@@ -7,6 +7,7 @@ import classes from './journal.module.css';
 
 import axios from '../../axios';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
+import JournalEntries from './JournalEntries/JournalEntries';
 
 const Journal = props => {
 
@@ -17,6 +18,15 @@ const Journal = props => {
     useEffect(() => {
         onFetchSessions(token);
     }, [token, onFetchSessions]);
+
+    const [selectedEntry, setSelectedEntry] = useState(null);
+
+    const clickEntryHandler = (data, index) => {
+        const sessionArray = heatmap.get(data.date.toDateString());
+        if (sessionArray) {
+            setSelectedEntry(sessionArray.map(session => session.id));
+        }
+    }
 
     const heatmap = new Map();
 
@@ -34,10 +44,18 @@ const Journal = props => {
         }
     });
 
+    const journalEntries = [];
+
+    if (selectedEntry) {
+        for (let session in selectedEntry) {
+            journalEntries.push(<JournalEntries />)
+        }
+    }
+
     return (
         <div className={classes.Journal}>
-            <Calendar heatmap={heatmap} />
-
+            <Calendar heatmap={heatmap} onClick={clickEntryHandler} />
+            {journalEntries}
         </div>)
 }
 

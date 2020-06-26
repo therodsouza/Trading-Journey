@@ -26,15 +26,6 @@ const Calendar = props => {
     data.push({ date, count });
   });
 
-  const clickEntryHandler = (data, index) => {
-
-    const sessionArray = props.heatmap.get(data.date.toDateString());
-
-    if (sessionArray) {
-      alert(sessionArray.map(session => session.id).concat(', '));
-    }
-  }
-
   return (
     <Fragment>
       <HeatMapDate
@@ -42,7 +33,7 @@ const Calendar = props => {
         endDate={endDate}
         data={data}
         colors={colors}
-        onClick={clickEntryHandler}
+        onClick={props.onClick}
       />
     </Fragment>
 
