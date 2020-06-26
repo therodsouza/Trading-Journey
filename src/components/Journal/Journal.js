@@ -18,13 +18,26 @@ const Journal = props => {
         onFetchSessions(token);
     }, [token, onFetchSessions]);
 
+    const heatmap = new Map();
+
+    sessions.forEach(session => {
+
+        if (session.profit) {
+            const date = new Date(session.startDateTime).toDateString();
+            const sessionArray = heatmap.get(date);
+
+            if (sessionArray) {
+                sessionArray.push({ id: session.id, count: session.profit });
+            } else {
+                heatmap.set(date, [{ id: session.id, count: session.profit }]);
+            }
+        }
+    });
+
     return (
         <div className={classes.Journal}>
-            <h4>Journal</h4>
-            <Calendar />
-            {sessions.map(session => {
-                return <p>{session.id}</p>
-            })}
+            <Calendar heatmap={heatmap} />
+
         </div>)
 }
 

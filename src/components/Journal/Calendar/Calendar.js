@@ -3,50 +3,50 @@ import HeatMapDate from "react-d3-heatmap";
 
 const Calendar = props => {
 
+  const colors = [];
+  colors.push({ count: -1000, color: "#E50000" });
+  colors.push({ count: -500, color: "#C11F00" });
+  colors.push({ count: -250, color: "#D88B00" });
+  colors.push({ count: 0, color: "#D2CA00" });
+  colors.push({ count: 250, color: "#91CB00" });
+  colors.push({ count: 500, color: "#4CC500" });
+  colors.push({ count: 1000, color: "#0CBF00" });
 
-    const startDate = new Date(2020, 2, 1);
-    const endDate = new Date(2020, 6, 15);
-    const data = setData(startDate, endDate, 50);
+  const startDate = new Date(2020, 0, 1);
+  const endDate = new Date(2020, 11, 15);
+  const data = [];
 
-    const colors = [];
-    colors.push({ count: 1, color: "#cc66ff" });
-    colors.push({ count: 3, color: "#ff9966" });
-    colors.push({ count: 2, color: "#003399" });
-    colors.push({ count: 5, color: "#990000" });
-    colors.push({ count: 9, color: "#00cc00" });
+  props.heatmap.forEach((sessions, date, m) => {
+    const count = sessions
+      .map(s => {
+        return s.count;
+      })
+      .reduce((sum, current) => sum + current, 0);
 
-    return (
-        <Fragment>
-            <HeatMapDate
-                startDate={startDate}
-                endDate={endDate}
-                data={data}
-                colors={colors}
-            />
-        </Fragment>
+    data.push({ date, count });
+  });
 
-    );
-}
+  const clickEntryHandler = (data, index) => {
 
-export const setData = (dateStart, dateEnd, nb) => {
-    const data = [];
-    const dates = [];
-    for (let i = 0; i < nb; i++) {
-      let date = randomDate(dateStart, dateEnd);
-      while (dates.includes(dates)) {
-        date = randomDate(dateStart, dateEnd);
-      }
-      dates.push(date);
-      const count = Math.floor(Math.random() * 14);
-      data.push({ date: new Date(date), count });
+    const sessionArray = props.heatmap.get(data.date.toDateString());
+
+    if (sessionArray) {
+      alert(sessionArray.map(session => session.id).concat(', '));
     }
-    return data;
-  };
-  
-  const randomDate = (start, end) => {
-    return new Date(
-      start.getTime() + Math.random() * (end.getTime() - start.getTime())
-    );
-  };
+  }
+
+  return (
+    <Fragment>
+      <HeatMapDate
+        startDate={startDate}
+        endDate={endDate}
+        data={data}
+        colors={colors}
+        onClick={clickEntryHandler}
+      />
+    </Fragment>
+
+  );
+}
 
 export default Calendar;
