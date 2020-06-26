@@ -1,22 +1,28 @@
 import React from 'react';
+import Moment from 'react-moment';
 
+import classes from './journalEntry.module.css';
 import { formatter } from '../../../../util/utility';
 
 const JournalEntry = props => {
 
-    return (<div>
-        <h4>Journal Entry {props.entry.id} </h4>
-        <div>
-            <div>
+    return (<div className={classes.JournalEntry}>
+        <h4>{props.entry.id} </h4>
+        <p>Duration: <span>
+                <Moment duration={props.entry.startDateTime} date={props.entry.endDateTime} />
+            </span> | Mental strengh: {props.entry.mentalStrength} | Physical strength: {props.entry.physicalStrength}
+        </p>
+        <div className={classes.container}>
+            <div className={classes.leftPanel}>
                 <p>Profit: <span>{formatter.format(props.entry.profit)}</span></p>
                 <p>Winners: <span>{props.entry.winners}</span></p>
                 <p>Losers: <span>{props.entry.losers}</span></p>
                 <p>Win rate: <span>{props.entry.winrate ? props.entry.winrate.toFixed(2) : 0}&#37;</span></p>
             </div>
-            <div>
+            <div className={classes.rightPanel}>
                 <p>Costs: <span>{formatter.format(props.entry.overallCosts)}</span></p>
-                <p>Row of winners: <span>{props.entry.maxSequenceWinners}</span></p>
-                <p>Row of losers: <span>{props.entry.maxSequenceLosers}</span></p>
+                <p>Volume: <span>{props.entry.volume}</span></p>
+                <p>Longest sequence: <span>{props.entry.maxSequenceWinners} winners | {props.entry.maxSequenceLosers} losers</span></p>
                 <p>Drawdown: <span>{formatter.format(props.entry.drawdown)}</span></p>
             </div>
         </div>

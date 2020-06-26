@@ -26,8 +26,8 @@ const PerformanceReport = props => {
                 </div>
                 <div className={classes.rightPanel}>
                     <p>Costs: <span>{formatter.format(props.overallCosts)}</span></p>
-                    <p>Row of winners: <span>{props.maxSequenceWinners}</span></p>
-                    <p>Row of losers: <span>{props.maxSequenceLosers}</span></p>
+                    <p>Volume: <span>{props.volume}</span></p>
+                    <p>Row of winners/losers: <span>{props.maxSequenceWinners} / <span>{props.maxSequenceLosers}</span></span></p>
                     <p>Drawdown: <span>{formatter.format(props.drawdown)}</span></p>
                 </div>
             </div>
@@ -42,6 +42,7 @@ const mapStateToProps = state => {
         winners: state.tradingSession.session.winners,
         losers: state.tradingSession.session.losers,
         winrate: state.tradingSession.session.winrate,
+        volume: state.tradingSession.session.volume,
         overallCosts: state.tradingSession.session.overallCosts,
         maxSequenceWinners: state.tradingSession.session.maxSequenceWinners,
         maxSequenceLosers: state.tradingSession.session.maxSequenceLosers,

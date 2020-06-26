@@ -62,7 +62,7 @@ export const endSession = (session, token) => {
 
     return dispatch => {
         const { sessionId, profit, winners, losers, winrate,
-            overallCosts, maxSequenceWinners,
+            overallCosts, volume, maxSequenceWinners,
             maxSequenceLosers, drawdown, comments } = session;
         const patch = {
             active: false,
@@ -72,6 +72,7 @@ export const endSession = (session, token) => {
             losers: losers,
             winrate: winrate,
             overallCosts: overallCosts,
+            volume: volume,
             maxSequenceWinners: maxSequenceWinners,
             maxSequenceLosers: maxSequenceLosers,
             drawdown: drawdown,
@@ -132,6 +133,7 @@ export const calculatePerformance = (trades) => {
     let maxSequenceLosers = 0;
     let rowWinners = 0;
     let maxSequenceWinners = 0;
+    let volume = 0;
 
     trades.filter(trade => {
         return trade.status === 'Closed'
@@ -159,7 +161,8 @@ export const calculatePerformance = (trades) => {
         maxSequenceLosers = maxSequenceLosers < rowLosers ? rowLosers : maxSequenceLosers;
 
         overallScore += score;
-        overallCosts += trade.volume * 0.5 // FIXME based on asset class
+        overallCosts += trade.volume * 0.5; // FIXME based on asset class
+        volume += trade.volume * 1;
 
         maxScore = maxScore < overallScore ? overallScore : maxScore;
         minScore = minScore > overallScore ? overallScore : minScore;
@@ -177,6 +180,7 @@ export const calculatePerformance = (trades) => {
             winners: winners,
             losers: losers,
             winrate: winrate,
+            volume: volume,
             overallCosts: overallCosts,
             maxSequenceWinners: maxSequenceWinners,
             maxSequenceLosers: maxSequenceLosers,
