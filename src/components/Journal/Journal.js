@@ -47,15 +47,16 @@ const Journal = props => {
     const journalEntries = [];
 
     if (selectedEntry) {
-        for (let session in selectedEntry) {
-            journalEntries.push(<JournalEntries />)
+        for (let index in selectedEntry) {
+            const session = props.sessions.find(s => s.id === selectedEntry[index]);
+            journalEntries.push(session)
         }
     }
 
     return (
         <div className={classes.Journal}>
             <Calendar heatmap={heatmap} onClick={clickEntryHandler} />
-            {journalEntries}
+            <JournalEntries entries={journalEntries} />
         </div>)
 }
 

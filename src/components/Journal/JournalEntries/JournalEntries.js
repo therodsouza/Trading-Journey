@@ -1,9 +1,16 @@
 import React from 'react';
+import JournalEntry from './JournalEntry/JournalEntry';
 
 const JournalEntries = props => {
 
-    return (<div><h4>Journal entries</h4></div>)
+    const entries = props.entries.map(session => {
+        return <JournalEntry entry={session} />
+    })
 
+    return (<div>
+        <h4>Journal Entries</h4>
+        {entries}
+    </div>)
 }
 
 export default JournalEntries;
