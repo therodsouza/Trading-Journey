@@ -4,7 +4,7 @@ import JournalEntry from './JournalEntry/JournalEntry';
 const JournalEntries = props => {
 
     const entries = props.entries.map(session => {
-        return <JournalEntry entry={session} />
+        return <JournalEntry entry={session} onShowTrades={props.onShowTrades} />
     })
 
     return (<div>

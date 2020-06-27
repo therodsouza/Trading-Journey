@@ -4,13 +4,15 @@ import Moment from 'react-moment';
 import classes from './journalEntry.module.css';
 import { formatter } from '../../../../util/utility';
 
+import Button from '../../../UI/Button/Button';
+
 const JournalEntry = props => {
 
     return (<div className={classes.JournalEntry}>
         <h4>{props.entry.id} </h4>
         <p>Duration: <span>
-                <Moment duration={props.entry.startDateTime} date={props.entry.endDateTime} />
-            </span> | Mental strengh: {props.entry.mentalStrength} | Physical strength: {props.entry.physicalStrength}
+            <Moment duration={props.entry.startDateTime} date={props.entry.endDateTime} />
+        </span> | Mental strengh: {props.entry.mentalStrength} | Physical strength: {props.entry.physicalStrength}
         </p>
         <div className={classes.container}>
             <div className={classes.leftPanel}>
@@ -26,8 +28,13 @@ const JournalEntry = props => {
                 <p>Drawdown: <span>{formatter.format(props.entry.drawdown)}</span></p>
             </div>
         </div>
+        <div className={classes.comments}>
+            <p>Comments: {props.entry.comments}</p>
+        </div>
+        <div className={classes.trades}>
+            <Button btnType="Success" onClick={() => props.onShowTrades(props.entry.id)}>Show trades</Button>
+        </div>
     </div>)
-
 }
 
 export default JournalEntry;

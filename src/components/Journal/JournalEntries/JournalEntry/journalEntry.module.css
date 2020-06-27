@@ -10,7 +10,6 @@
     float: left;
 }
 
-
 .JournalEntry .container {
     padding: 1%;
 }
@@ -25,4 +24,15 @@
 .JournalEntry .rightPanel {
     margin-left: 1%;
     float: left;
+}
+
+.JournalEntry .comments {
+    float: left;
+    width: 100%;
+    padding: .5%;
+    margin-top: 1%;
+}
+
+.JournalEntry .trades {
+    float: right;
 }
