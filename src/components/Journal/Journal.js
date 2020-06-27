@@ -9,7 +9,7 @@ import axios from '../../axios';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import JournalEntries from './JournalEntries/JournalEntries';
 import Modal from '../UI/Modal/Modal';
-import TradeTable from '../TradeTable/TradeTable';
+import TradeList from './TradeList/TradeList';
 
 const Journal = props => {
 
@@ -23,7 +23,7 @@ const Journal = props => {
     }, [token, onFetchSessions]);
 
     const [selectedEntry, setSelectedEntry] = useState(null);
-    const [showTrades, setShowTrades] = useState(null);
+    const [selectedSession, setSelectedSession] = useState(null);
 
     const clickEntryHandler = (data, index) => {
         const sessionArray = heatmap.get(data.date.toDateString());
@@ -32,13 +32,13 @@ const Journal = props => {
         }
     }
 
-    const showTradesHandler = (sessionId) => {
-        setShowTrades(sessionId);
+    const selectedSessionHandler = (sessionId) => {
+        setSelectedSession(sessionId);
     }
 
     useEffect(() => {
-        onFetchTrades(showTrades, token);
-    }, [showTrades, token, onFetchTrades])
+        onFetchTrades(selectedSession, token);
+    }, [selectedSession, token, onFetchTrades])
 
     const heatmap = new Map();
 
@@ -68,9 +68,9 @@ const Journal = props => {
     return (
         <div className={classes.Journal}>
             <Calendar heatmap={heatmap} onClick={clickEntryHandler} />
-            <JournalEntries entries={journalEntries} onShowTrades={showTradesHandler} />
-            <Modal show={showTrades} modalClosed={() => setShowTrades(null)} >
-                <TradeTable trades={props.trades} />
+            <JournalEntries entries={journalEntries} onShowTrades={selectedSessionHandler} />
+            <Modal show={selectedSession} modalClosed={() => setSelectedSession(null)} >
+                <TradeList title={'Session ' + selectedSession} trades={props.trades} />
             </Modal>
         </div>)
 }

@@ -1,0 +1,11 @@
+.TradeList {
+    margin: 1%;
+}
+
+.TradeList .winner {
+    color: #28a745;
+}
+
+.TradeList .loser {
+    color: #dc3545;
+}

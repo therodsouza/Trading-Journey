@@ -2,6 +2,8 @@ import * as actionTypes from './actionTypes';
 
 import axios from '../../axios';
 
+import { calculateProfit } from '../../service/trade/trade';
+
 export const createSessionSuccess = (id, session) => {
     return {
         type: actionTypes.CREATE_SESSION_SUCCESS,
@@ -123,9 +125,9 @@ export const restoreSession = (token) => {
 
 export const calculatePerformance = (trades) => {
 
-    let maxScore = 0;
-    let minScore = null;
-    let overallScore = 0;
+    let maxPL = 0;
+    let minPL = null;
+    let overallPL = 0;
     let overallCosts = 0;
     let winners = 0;
     let losers = 0;
@@ -139,15 +141,9 @@ export const calculatePerformance = (trades) => {
         return trade.status === 'Closed'
     }).map(trade => {
 
-        let score = 0;
+        const pL = calculateProfit(trade);
 
-        if (trade.side === 'Long') {
-            score = + (trade.priceOut - trade.priceIn) * trade.volume;
-        } else {
-            score = - (trade.priceOut - trade.priceIn) * trade.volume;
-        }
-
-        if (score > 0) {
+        if (pL > 0) {
             winners++;
             rowWinners++
             rowLosers = 0;
@@ -160,18 +156,18 @@ export const calculatePerformance = (trades) => {
         maxSequenceWinners = maxSequenceWinners < rowWinners ? rowWinners : maxSequenceWinners;
         maxSequenceLosers = maxSequenceLosers < rowLosers ? rowLosers : maxSequenceLosers;
 
-        overallScore += score;
+        overallPL += pL;
         overallCosts += trade.volume * 0.5; // FIXME based on asset class
         volume += trade.volume * 1;
 
-        maxScore = maxScore < overallScore ? overallScore : maxScore;
-        minScore = minScore > overallScore ? overallScore : minScore;
+        maxPL = maxPL < overallPL ? overallPL : maxPL;
+        minPL = minPL > overallPL ? overallPL : minPL;
         return trade;
     });
 
-    const profit = (overallScore * .2) - overallCosts; // FIXME based on asset class
+    const profit = overallPL - overallCosts;
     const winrate = (winners / (losers + winners)) * 100;
-    const drawdown = (minScore - maxScore) * .2;
+    const drawdown = (minPL - maxPL);
 
     return {
         type: actionTypes.CALCULATE_PERFORMANCE,
