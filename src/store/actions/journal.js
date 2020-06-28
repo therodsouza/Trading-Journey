@@ -2,9 +2,9 @@ import * as actionTypes from './actionTypes';
 import axios from '../../axios';
 import { sessionComparator } from '../../util/utility';
 
-export const fetchSessions = (token) => {
+export const fetchSessions = (userId, token) => {
     return dispatch => {
-        axios.get('/sessions.json?auth=' + token + '&orderBy="active"&equalTo=false')
+        axios.get('/sessions.json?auth=' + token + '&orderBy="userId"&equalTo="' + userId + '"&orderBy="active"&equalTo=false')
             .then(response => {
                 const fetchedSessions = [];
                 for (let key in response.data) {

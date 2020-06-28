@@ -14,13 +14,14 @@ import TradeList from './TradeList/TradeList';
 const Journal = props => {
 
     const sessions = props.sessions;
+    const userId = props.userId;
     const token = props.token;
     const onFetchSessions = props.onFetchSessions;
     const onFetchTrades = props.onFetchTrades;
 
     useEffect(() => {
-        onFetchSessions(token);
-    }, [token, onFetchSessions]);
+        onFetchSessions(userId, token);
+    }, [userId, token, onFetchSessions]);
 
     const [selectedEntry, setSelectedEntry] = useState(null);
     const [selectedSession, setSelectedSession] = useState(null);
@@ -79,13 +80,14 @@ const mapStateToProps = state => {
     return {
         sessions: state.journal.sessions,
         trades: state.trade.trades,
+        userId: state.auth.userId,
         token: state.auth.token
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchSessions: (token) => dispatch(actions.fetchSessions(token)),
+        onFetchSessions: (userId, token) => dispatch(actions.fetchSessions(userId, token)),
         onFetchTrades: (sessionId, token) => dispatch(actions.fetchTrades(sessionId, token))
     }
 }
